@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RentLink — Manage Tenants</title>
+  <link rel="stylesheet" href="../Assets/CSS/main-style.css" />
+  <link rel="stylesheet" href="../Assets/CSS/navigation.css" />
+  <link rel="stylesheet" href="../Assets/CSS/dashboard-cards.css" />
+  <link rel="stylesheet" href="../Assets/CSS/forms.css" />
+  <style>
+    .tenant-table { width: 100%; border-collapse: collapse; }
+    .tenant-table thead tr { border-bottom: 2px solid var(--border); }
+    .tenant-table th {
+      text-align: left; padding: 0.6rem 0.75rem;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text-muted);
+    }
+    .tenant-table tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    .tenant-table tbody tr:last-child { border-bottom: none; }
+    .tenant-table tbody tr:hover { background: rgba(255,255,255,0.025); }
+    .tenant-table td { padding: 0.85rem 0.75rem; font-size: 0.85rem; color: var(--text-gray); vertical-align: middle; }
+    .tenant-table td:first-child { color: var(--text-white); font-weight: 500; }
+    .tenant-actions-cell { display: flex; gap: 0.4rem; }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><div class="logo-mark">RL</div><span class="logo-name">Rent<span>Link</span></span></a>
+      <nav class="main-nav">
+        <a href="../mnt/user-data/outputs/rentlink2/tenant/index.html"   class="nav-link">Tenant</a>
+        <a href="../landlord/index.html" class="nav-link">Landlord</a>
+        <a href="../admin/index.html"    class="nav-link active">Admin</a>
+      </nav>
+      <div class="nav-right"><span class="role-badge admin">Admin</span><div class="nav-avatar">AD</div></div>
+    </div>
+  </header>
+
+  <nav class="sub-nav">
+    <div class="sub-nav-inner">
+      <a href="../index.html"           class="sub-nav-link">Home</a>
+      <a href="admin-dashboard.html" class="sub-nav-link">Dashboard</a>
+      <a href="admin-broadcast.html" class="sub-nav-link">Broadcast</a>
+      <a href="admin-tenants.html"   class="sub-nav-link active">Tenants</a>
+      <a href="admin-settings.html"  class="sub-nav-link">Settings</a>
+      <a href="admin-logs.html"      class="sub-nav-link">Logs</a>
+    </div>
+  </nav>
+
+  <main class="page-wrapper">
+
+    <div class="breadcrumb">
+      <a href="../index.html">RentLink</a><span class="breadcrumb-sep">›</span>
+      <a href="index.html">Admin</a><span class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current">Tenants</span>
+    </div>
+
+    <div class="page-header fade-up">
+      <div class="page-header-text"><h1>Tenant Accounts</h1><p>All active tenants across Block A — 8 units, 8 tenants.</p></div>
+      <button class="btn btn-primary btn-sm">+ Add Tenant</button>
+    </div>
+
+    <!-- Stats -->
+    <div class="stat-grid fade-up-2">
+      <div class="stat-card green">
+        <span class="stat-icon">👥</span>
+        <div class="stat-label">Total Tenants</div>
+        <div class="stat-value">8</div>
+        <div class="stat-change up">All units occupied</div>
+      </div>
+      <div class="stat-card blue">
+        <span class="stat-icon">✅</span>
+        <div class="stat-label">Good Standing</div>
+        <div class="stat-value">7</div>
+        <div class="stat-change up">Paid on time</div>
+      </div>
+      <div class="stat-card orange">
+        <span class="stat-icon">⚠️</span>
+        <div class="stat-label">Needs Attention</div>
+        <div class="stat-value">1</div>
+        <div class="stat-change down">Overdue payment</div>
+      </div>
+      <div class="stat-card teal">
+        <span class="stat-icon">📋</span>
+        <div class="stat-label">Active Leases</div>
+        <div class="stat-value">8</div>
+        <div class="stat-change flat">All current</div>
+      </div>
+    </div>
+
+    <!-- Tenant Table -->
+    <div class="card fade-up-3">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+        <div><span class="section-label">All Tenants</span><h2>Block A Directory</h2></div>
+        <div style="display:flex;gap:0.6rem;">
+          <div class="select-wrap" style="width:160px;">
+            <select class="form-select" style="padding:0.5rem 2rem 0.5rem 0.75rem;font-size:0.8rem;">
+              <option>All Floors</option>
+              <option>Floor 1</option>
+              <option>Floor 2</option>
+              <option>Floor 3</option>
+            </select>
+          </div>
+          <div class="select-wrap" style="width:160px;">
+            <select class="form-select" style="padding:0.5rem 2rem 0.5rem 0.75rem;font-size:0.8rem;">
+              <option>All Statuses</option>
+              <option>Paid</option>
+              <option>Pending</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div style="overflow-x:auto;">
+        <table class="tenant-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Unit</th>
+              <th>Monthly Rent</th>
+              <th>Lease Until</th>
+              <th>April Status</th>
+              <th>Open Tickets</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Ramon Cruz</td>
+              <td>1-A</td>
+              <td>₱12,500</td>
+              <td>Dec 2026</td>
+              <td><span class="badge badge-green">Paid</span></td>
+              <td>0</td>
+              <td><div class="tenant-actions-cell"><button class="btn btn-sm btn-secondary">View</button><button class="btn btn-sm btn-ghost">Edit</button></div></td>
+            </tr>
+            <tr>
+              <td>Luz Villanueva</td>
+              <td>1-B</td>
+              <td>₱11,000</td>
+              <td>Jun 2026</td>
+              <td><span class="badge badge-green">Paid</span></td>
+              <td>0</td>
+              <td><div class="tenant-actions-cell"><button class="btn btn-sm btn-secondary">View</button><button class="btn btn-sm btn-ghost">Edit</button></div></td>
+            </tr>
+            <tr>
+              <td>Joel Reyes</td>
+              <td>1-C</td>
+              <td>₱10,500</td>
+              <td>Sep 2026</td>
+              <td><span class="badge badge-green">Paid</span></td>
+              <td>1</td>
+              <td><div class="tenant-actions-cell"><button class="btn btn-sm btn-secondary">View</button><button class="btn btn-sm btn-ghost">Edit</button></div></td>
+            </tr>
+            <tr>
+              <td>Maria Santos</td>
+              <td>2-A</td>
+              <td>₱13,000</td>
+              <td>Dec 2026</td>
+              <td><span class="badge badge-green">Paid</span></td>
+              <td>2</td>
+              <td><div class="tenant-actions-cell"><button class="btn btn-sm btn-secondary">View</button><button class="btn btn-sm btn-ghost">Edit</button></div></td>
+            </tr>
+            <tr>
+              <td>Danilo Abante</td>
+              <td>2-B</td>
+              <td>₱13,000</td>
+              <td>Mar 2027</td>
+              <td><span class="badge badge-green">Paid</span></td>
+              <td>0</td>
+              <td><div class="tenant-actions-cell"><button class="btn btn-sm btn-secondary">View</button><button class="btn btn-sm btn-ghost">Edit</button></div></td>
+            </tr>
+            <tr>
+              <td>Carla Mendoza</td>
+              <td>3-A</td>
+              <td>₱14,000</td>
+              <td>Dec 2026</td>
+              <td><span class="badge badge-green">Paid</span></td>
+              <td>0</td>
+              <td><div class="tenant-actions-cell"><button class="btn btn-sm btn-secondary">View</button><button class="btn btn-sm btn-ghost">Edit</button></div></td>
+            </tr>
+            <tr style="background:rgba(230,126,34,0.04);">
+              <td>Efren Tolentino</td>
+              <td>3-B</td>
+              <td>₱12,500</td>
+              <td>Aug 2026</td>
+              <td><span class="badge badge-orange">Pending</span></td>
+              <td>0</td>
+              <td><div class="tenant-actions-cell"><button class="btn btn-sm btn-secondary">View</button><button class="btn btn-sm btn-danger">Remind</button></div></td>
+            </tr>
+            <tr>
+              <td>Ana Delos Reyes</td>
+              <td>3-D</td>
+              <td>₱13,500</td>
+              <td>Dec 2026</td>
+              <td><span class="badge badge-green">Paid</span></td>
+              <td>1</td>
+              <td><div class="tenant-actions-cell"><button class="btn btn-sm btn-secondary">View</button><button class="btn btn-sm btn-ghost">Edit</button></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand"><div class="footer-brand-dot"></div><span class="footer-copy">© 2026 RentLink Portal — Admin View</span></div>
+      <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Support</a></div>
+    </div>
+  </footer>
+</body>
+</html>

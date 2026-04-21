@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RentLink — Finances</title>
+ <link rel="stylesheet" href="../Assets/CSS/main-style.css" />
+  <link rel="stylesheet" href="../Assets/CSS/navigation.css" />
+  <link rel="stylesheet" href="../Assets/CSS/dashboard-cards.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><div class="logo-mark">RL</div><span class="logo-name">Rent<span>Link</span></span></a>
+      <nav class="main-nav">
+        <a href="#" class="nav-link active">Home</a>
+        <a href="#" class="nav-link">About us</a>
+        <a href="#" class="nav-link">Contacts</a>
+      </nav>
+      <div class="nav-right"><span class="role-badge landlord">Landlord</span><div class="nav-avatar">RC</div></div>
+    </div>
+  </header>
+
+  <nav class="sub-nav">
+    <div class="sub-nav-inner">
+      <a href="index.html"               class="sub-nav-link">Home</a>
+      <a href="landlord-dashboard.html"  class="sub-nav-link">Dashboard</a>
+      <a href="landlord-units.html"      class="sub-nav-link">Units</a>
+      <a href="landlord-tickets.html"    class="sub-nav-link">Tickets</a>
+      <a href="landlord-finances.html"   class="sub-nav-link active">Finances</a>
+      <a href="landlord-reports.html"    class="sub-nav-link">Reports</a>
+    </div>
+  </nav>
+
+  <main class="page-wrapper">
+
+    <div class="breadcrumb">
+      <a href="../index.html">RentLink</a><span class="breadcrumb-sep">›</span>
+      <a href="index.html">Landlord</a><span class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current">Finances</span>
+    </div>
+
+    <div class="page-header fade-up">
+      <div class="page-header-text"><h1>Financial Overview</h1><p>April 2026 · Block A income, expenses, and net summary</p></div>
+      <a href="landlord-reports.html" class="btn btn-primary btn-sm">Generate Report</a>
+    </div>
+
+    <div class="stat-grid fade-up-2">
+      <div class="stat-card green">
+        <span class="stat-icon">💰</span>
+        <div class="stat-label">Gross Income</div>
+        <div class="stat-value">₱87,500</div>
+        <div class="stat-change up">Collected this month</div>
+      </div>
+      <div class="stat-card red">
+        <span class="stat-icon">💸</span>
+        <div class="stat-label">Total Expenses</div>
+        <div class="stat-value">₱14,200</div>
+        <div class="stat-change down">Repairs + utilities</div>
+      </div>
+      <div class="stat-card blue">
+        <span class="stat-icon">📈</span>
+        <div class="stat-label">Net Income</div>
+        <div class="stat-value">₱73,300</div>
+        <div class="stat-change up">After all costs</div>
+      </div>
+      <div class="stat-card orange">
+        <span class="stat-icon">⏳</span>
+        <div class="stat-label">Outstanding</div>
+        <div class="stat-value">₱12,500</div>
+        <div class="stat-change flat">Unit 3-B unpaid</div>
+      </div>
+    </div>
+
+    <div class="grid-2 fade-up-3">
+
+      <!-- Income Breakdown -->
+      <div class="card">
+        <span class="section-label">Income</span>
+        <h2 style="margin-bottom:1rem;">Rent Collected — April 2026</h2>
+        <table class="finance-table">
+          <tr><td>Unit 1-A — Ramon Cruz</td><td class="ft-income">₱12,500</td></tr>
+          <tr><td>Unit 1-B — Luz Villanueva</td><td class="ft-income">₱11,000</td></tr>
+          <tr><td>Unit 1-C — Joel Reyes</td><td class="ft-income">₱10,500</td></tr>
+          <tr><td>Unit 2-A — Maria Santos</td><td class="ft-income">₱13,000</td></tr>
+          <tr><td>Unit 2-B — Danilo Abante</td><td class="ft-income">₱13,000</td></tr>
+          <tr><td>Unit 3-A — Carla Mendoza</td><td class="ft-income">₱14,000</td></tr>
+          <tr><td>Unit 3-B — Efren Tolentino</td><td class="ft-pending">₱0 (Pending)</td></tr>
+          <tr><td>Unit 3-D — Ana Delos Reyes</td><td class="ft-income">₱13,500</td></tr>
+          <tr><td><strong>Total Collected</strong></td><td class="ft-total">₱87,500</td></tr>
+        </table>
+        <div class="progress-block">
+          <div class="progress-meta"><span>Collection Rate</span><span>87.5%</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width:87.5%"></div></div>
+        </div>
+      </div>
+
+      <!-- Expenses + Net -->
+      <div style="display:flex;flex-direction:column;gap:1.5rem;">
+
+        <div class="card">
+          <span class="section-label">Expenses</span>
+          <h2 style="margin-bottom:1rem;">April 2026 Costs</h2>
+          <table class="finance-table">
+            <tr><td>Plumbing — Unit 2-A faucet repair</td><td class="ft-expense">–₱2,500</td></tr>
+            <tr><td>Electrical — Unit 1-C outlet fix</td><td class="ft-expense">–₱1,800</td></tr>
+            <tr><td>AC service — Unit 2-A (labor)</td><td class="ft-expense">–₱3,000</td></tr>
+            <tr><td>Common area utilities</td><td class="ft-expense">–₱4,400</td></tr>
+            <tr><td>Cleaning & miscellaneous</td><td class="ft-expense">–₱2,500</td></tr>
+            <tr><td><strong>Total Expenses</strong></td><td class="ft-expense">–₱14,200</td></tr>
+          </table>
+        </div>
+
+        <div class="card">
+          <span class="section-label">Summary</span>
+          <h2 style="margin-bottom:1rem;">Net Result</h2>
+          <table class="finance-table">
+            <tr><td>Gross Income</td><td class="ft-income">₱87,500</td></tr>
+            <tr><td>Total Expenses</td><td class="ft-expense">–₱14,200</td></tr>
+            <tr><td>Outstanding (Unit 3-B)</td><td class="ft-pending">₱12,500 due</td></tr>
+            <tr><td><strong>Net Income (Collected)</strong></td><td class="ft-net">₱73,300</td></tr>
+          </table>
+          <div class="progress-block">
+            <div class="progress-meta"><span>Expense Ratio</span><span>16.2% of gross</span></div>
+            <div class="progress-track"><div class="progress-fill orange" style="width:16.2%"></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Year-to-date bar chart -->
+    <div class="card fade-up-4" style="margin-top:1.5rem;">
+      <span class="section-label">YTD Trend</span>
+      <h2 style="margin-bottom:0.5rem;">Monthly Net Income — 2026</h2>
+      <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.5rem;">₱ thousands after expenses</p>
+      <div class="bar-chart">
+        <div class="bar-col"><div class="bar-fill" style="height:80%"></div><span class="bar-label">Jan</span></div>
+        <div class="bar-col"><div class="bar-fill" style="height:85%"></div><span class="bar-label">Feb</span></div>
+        <div class="bar-col"><div class="bar-fill" style="height:100%"></div><span class="bar-label">Mar</span></div>
+        <div class="bar-col"><div class="bar-fill dim" style="height:79%"></div><span class="bar-label">Apr</span></div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand"><div class="footer-brand-dot"></div><span class="footer-copy">© 2026 RentLink Portal — Landlord View</span></div>
+      <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Support</a></div>
+    </div>
+  </footer>
+</body>
+</html>

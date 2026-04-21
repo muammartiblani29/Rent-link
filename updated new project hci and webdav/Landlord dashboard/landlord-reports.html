@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RentLink — Reports</title>
+ <link rel="stylesheet" href="../Assets/CSS/main-style.css" />
+  <link rel="stylesheet" href="../Assets/CSS/navigation.css" />
+  <link rel="stylesheet" href="../Assets/CSS/dashboard-cards.css" />
+   <link rel="stylesheet" href="../Assets/CSS/forms.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><div class="logo-mark">RL</div><span class="logo-name">Rent<span>Link</span></span></a>
+      <nav class="main-nav">
+         <a href="#" class="nav-link active">Home</a>
+        <a href="#" class="nav-link">About us</a>
+        <a href="#" class="nav-link">Contacts</a>
+      </nav>
+      <div class="nav-right"><span class="role-badge landlord">Landlord</span><div class="nav-avatar">RC</div></div>
+    </div>
+  </header>
+
+  <nav class="sub-nav">
+    <div class="sub-nav-inner">
+      <a href="index.html"               class="sub-nav-link">Home</a>
+      <a href="landlord-dashboard.html"  class="sub-nav-link">Dashboard</a>
+      <a href="landlord-units.html"      class="sub-nav-link">Units</a>
+      <a href="landlord-tickets.html"    class="sub-nav-link">Tickets</a>
+      <a href="landlord-finances.html"   class="sub-nav-link">Finances</a>
+      <a href="landlord-reports.html"    class="sub-nav-link active">Reports</a>
+    </div>
+  </nav>
+
+  <main class="page-wrapper">
+
+    <div class="breadcrumb">
+      <a href="../index.html">RentLink</a><span class="breadcrumb-sep">›</span>
+      <a href="index.html">Landlord</a><span class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current">Reports</span>
+    </div>
+
+    <div class="page-header fade-up">
+      <div class="page-header-text"><h1>Monthly Reports</h1><p>Generate and review financial and maintenance summaries.</p></div>
+    </div>
+
+    <div class="grid-2 fade-up-2">
+
+      <!-- Generate Report Form -->
+      <div class="form-card">
+        <div class="form-card-header">
+          <span class="section-label">Generate</span>
+          <h2>New Report</h2>
+          <p>Choose a report type and period to generate a summary.</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="rtype">Report Type</label>
+          <div class="select-wrap">
+            <select class="form-select" id="rtype">
+              <option value="" disabled selected>Select type…</option>
+              <option>Monthly Income Summary</option>
+              <option>Expense Breakdown</option>
+              <option>Maintenance & Tickets Log</option>
+              <option>Tenant Payment History</option>
+              <option>Full Monthly Report (All)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="rmonth">Month</label>
+            <div class="select-wrap">
+              <select class="form-select" id="rmonth">
+                <option>April 2026</option>
+                <option>March 2026</option>
+                <option>February 2026</option>
+                <option>January 2026</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="rformat">Format</label>
+            <div class="select-wrap">
+              <select class="form-select" id="rformat">
+                <option>PDF</option>
+                <option>CSV</option>
+                <option>Print View</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-primary btn-full">Generate Report →</button>
+        </div>
+      </div>
+
+      <!-- Past Reports -->
+      <div class="card">
+        <span class="section-label">History</span>
+        <h2 style="margin-bottom:1.25rem;">Past Reports</h2>
+        <div class="ticket-list">
+          <div class="ticket-row">
+            <span class="ticket-id">APR-26</span>
+            <div>
+              <div class="ticket-info-title">April 2026 — Full Monthly Report</div>
+              <div class="ticket-info-sub">Generated Apr 11, 2026 · PDF</div>
+            </div>
+            <button class="btn btn-sm btn-ghost">Download</button>
+          </div>
+          <div class="ticket-row">
+            <span class="ticket-id">MAR-26</span>
+            <div>
+              <div class="ticket-info-title">March 2026 — Full Monthly Report</div>
+              <div class="ticket-info-sub">Generated Mar 31, 2026 · PDF</div>
+            </div>
+            <button class="btn btn-sm btn-ghost">Download</button>
+          </div>
+          <div class="ticket-row">
+            <span class="ticket-id">FEB-26</span>
+            <div>
+              <div class="ticket-info-title">February 2026 — Income Summary</div>
+              <div class="ticket-info-sub">Generated Feb 28, 2026 · PDF</div>
+            </div>
+            <button class="btn btn-sm btn-ghost">Download</button>
+          </div>
+          <div class="ticket-row">
+            <span class="ticket-id">JAN-26</span>
+            <div>
+              <div class="ticket-info-title">January 2026 — Full Monthly Report</div>
+              <div class="ticket-info-sub">Generated Jan 31, 2026 · PDF</div>
+            </div>
+            <button class="btn btn-sm btn-ghost">Download</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand"><div class="footer-brand-dot"></div><span class="footer-copy">© 2026 RentLink Portal — Landlord View</span></div>
+      <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Support</a></div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,165 @@
+/* ================================================
+   main-style.css — RentLink Portal | Base & Tokens
+   ================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Sora:wght@600;700;800&display=swap');
+
+/* ── Design Tokens ────────────────────────────── */
+:root {
+  --bg-main:        #1e2d3d;
+  --bg-deep:        #172030;
+  --bg-header:      #162132;
+  --bg-card:        #243447;
+  --bg-card-alt:    #1d2c3c;
+  --bg-card-hover:  #2a3d52;
+  --accent-green:   #27AE60;
+  --accent-mint:    #2ECC71;
+  --accent-blue:    #3498db;
+  --accent-orange:  #e67e22;
+  --accent-red:     #e74c3c;
+  --text-white:     #f0f4f8;
+  --text-gray:      #cbd5e0;
+  --text-muted:     #7a95ab;
+  --border:         rgba(255,255,255,0.07);
+  --border-hover:   rgba(255,255,255,0.14);
+  --shadow-sm:      0 2px 8px rgba(0,0,0,0.2);
+  --shadow:         0 4px 24px rgba(0,0,0,0.3);
+  --shadow-lg:      0 12px 40px rgba(0,0,0,0.4);
+  --radius-sm:      6px;
+  --radius:         12px;
+  --radius-lg:      18px;
+  --font-head:      'Sora', sans-serif;
+  --font-body:      'DM Sans', sans-serif;
+  --transition:     0.2s ease;
+}
+
+/* ── Reset ────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-main);
+  background-image:
+    radial-gradient(ellipse at 20% 0%, rgba(39,174,96,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, rgba(52,152,219,0.05) 0%, transparent 50%);
+  color: var(--text-gray);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Typography ───────────────────────────────── */
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-head);
+  color: var(--text-white);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+h1 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+h2 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
+h3 { font-size: 1.1rem; }
+h4 { font-size: 0.95rem; }
+
+p { color: var(--text-gray); font-size: 0.9rem; }
+
+a { color: var(--accent-mint); text-decoration: none; transition: color var(--transition); }
+a:hover { color: var(--text-white); }
+
+/* ── Layout ───────────────────────────────────── */
+.page-wrapper {
+  flex: 1;
+  max-width: 1160px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+}
+
+.page-header {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.page-header-text h1 { margin-bottom: 0.3rem; }
+.page-header-text p  { color: var(--text-muted); font-size: 0.875rem; }
+
+/* ── Cards ────────────────────────────────────── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  box-shadow: var(--shadow);
+  transition: border-color var(--transition);
+}
+.card:hover { border-color: var(--border-hover); }
+
+/* ── Section Label ────────────────────────────── */
+.section-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-mint);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+/* ── Grids ────────────────────────────────────── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+.grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.25rem; }
+
+/* ── Badges ───────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.22rem 0.65rem;
+  border-radius: 99px;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+.badge-green  { background: rgba(39,174,96,0.12);  color: #2ecc71; border-color: rgba(39,174,96,0.25); }
+.badge-orange { background: rgba(230,126,34,0.12); color: #f39c12; border-color: rgba(230,126,34,0.25); }
+.badge-red    { background: rgba(231,76,60,0.12);  color: #e74c3c; border-color: rgba(231,76,60,0.25); }
+.badge-blue   { background: rgba(52,152,219,0.12); color: #5dade2; border-color: rgba(52,152,219,0.25); }
+.badge-gray   { background: rgba(255,255,255,0.06); color: var(--text-muted); border-color: var(--border); }
+
+/* ── Divider ──────────────────────────────────── */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1.5rem 0;
+}
+
+/* ── Page-load fade-in ────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.45s ease both; }
+.fade-up-2 { animation: fadeUp 0.45s 0.08s ease both; }
+.fade-up-3 { animation: fadeUp 0.45s 0.16s ease both; }
+.fade-up-4 { animation: fadeUp 0.45s 0.24s ease both; }
+
+/* ── Responsive ───────────────────────────────── */
+@media (max-width: 900px) {
+  .grid-4 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .page-header { flex-direction: column; }
+}

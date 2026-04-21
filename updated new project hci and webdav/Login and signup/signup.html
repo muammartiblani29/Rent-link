@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RentLink — Create Account</title>
+   <link rel="stylesheet" href="../Assets/CSS/main-style.css" />
+  <link rel="stylesheet" href="../Assets/CSS/auth.css" />
+  <style>
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      20%     { transform: translateX(-7px); }
+      40%     { transform: translateX(7px); }
+      60%     { transform: translateX(-4px); }
+      80%     { transform: translateX(4px); }
+    }
+    .shake { animation: shake 0.4s ease; }
+
+    .auth-input.error {
+      border-color: var(--accent-red) !important;
+      box-shadow: 0 0 0 3px rgba(231,76,60,0.14) !important;
+    }
+    .field-error {
+      font-size: 0.73rem;
+      color: var(--accent-red);
+      margin-top: 0.35rem;
+      display: none;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .field-error.show { display: flex; }
+
+    /* 2-col row for first/last name */
+    .name-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+    }
+    @media (max-width: 440px) {
+      .name-row { grid-template-columns: 1fr; }
+    }
+
+    /* requirement checks */
+    .req-list { display: flex; flex-direction: column; gap: 0.3rem; }
+    .req-item {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s;
+    }
+    .req-item.ok  { color: var(--accent-mint); }
+    .req-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    .req-item.ok .req-dot { background: var(--accent-mint); }
+
+    /* success overlay */
+    .success-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(14,22,32,0.93);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      text-align: center;
+      padding: 2rem;
+    }
+    .success-overlay.show { display: flex; }
+    .success-circle {
+      width: 80px; height: 80px;
+      background: rgba(39,174,96,0.14);
+      border: 2px solid rgba(39,174,96,0.4);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.25rem;
+      animation: successPop 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    @keyframes successPop {
+      from { transform: scale(0.5); opacity: 0; }
+      to   { transform: scale(1);   opacity: 1; }
+    }
+    .success-overlay h2 { color: var(--text-white); font-family: var(--font-head); font-size: 1.3rem; }
+    .success-overlay p  { color: var(--text-muted); font-size: 0.85rem; max-width: 320px; line-height: 1.6; }
+    .success-overlay a  {
+      margin-top: 0.5rem;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--accent-green); color: #fff;
+      padding: 0.75rem 1.75rem;
+      border-radius: var(--radius-sm);
+      font-weight: 700; font-family: var(--font-body); font-size: 0.9rem;
+      text-decoration: none;
+      transition: filter 0.2s;
+    }
+    .success-overlay a:hover { filter: brightness(1.1); }
+  </style>
+</head>
+<body class="auth-body">
+
+  <!-- Success overlay -->
+  <div class="success-overlay" id="successOverlay">
+    <div class="success-circle">✓</div>
+    <h2>Account Created!</h2>
+    <p>Your RentLink account has been set up. You can now sign in with your credentials.</p>
+    <a href="login.html">Go to Sign In →</a>
+  </div>
+
+  <div class="auth-wrap wide">
+
+    <!-- Brand -->
+    <a href="index.html" class="auth-brand">
+      <div class="auth-logo-mark">RL</div>
+      <span class="auth-logo-name">Rent<span>Link</span></span>
+      <span class="auth-logo-tagline">Property Management Portal</span>
+    </a>
+
+    <div class="auth-card" id="signupCard">
+
+      <!-- Step indicator -->
+      <div class="auth-steps" id="stepBar">
+        <div class="auth-step-wrap">
+          <div class="auth-step-dot active" id="dot1">1</div>
+          <span class="auth-step-label active" id="lbl1">Role</span>
+        </div>
+        <div class="auth-step-line" id="line1"></div>
+        <div class="auth-step-wrap">
+          <div class="auth-step-dot" id="dot2">2</div>
+          <span class="auth-step-label" id="lbl2">Details</span>
+        </div>
+        <div class="auth-step-line" id="line2"></div>
+        <div class="auth-step-wrap">
+          <div class="auth-step-dot" id="dot3">3</div>
+          <span class="auth-step-label" id="lbl3">Password</span>
+        </div>
+      </div>
+
+      <!-- ══════ STEP 1 — Role ══════ -->
+      <div id="step1">
+        <div class="auth-card-header">
+          <h1>Create your account</h1>
+          <p>Choose your role to set up the right dashboard for you.</p>
+        </div>
+
+        <!-- Role cards -->
+        <div class="role-selector" id="roleSelector">
+          <label class="role-option selected" data-role="tenant">
+            <input type="radio" name="role" value="tenant" checked />
+            <span class="role-option-icon">🏠</span>
+            <span class="role-option-label">Tenant</span>
+          </label>
+          <label class="role-option" data-role="landlord">
+            <input type="radio" name="role" value="landlord" />
+            <span class="role-option-icon">📊</span>
+            <span class="role-option-label">Landlord</span>
+          </label>
+          <label class="role-option" data-role="admin">
+            <input type="radio" name="role" value="admin" />
+            <span class="role-option-icon">⚙️</span>
+            <span class="role-option-label">Admin</span>
+          </label>
+        </div>
+
+        <!-- Role-specific fields -->
+        <div id="tenantExtra">
+          <div class="auth-notice info">
+            <span class="auth-notice-icon">🏠</span>
+            <p>As a <strong>Tenant</strong> you can submit maintenance tickets, upload payment receipts, and view your lease info.</p>
+          </div>
+          <div class="auth-field">
+            <label class="auth-label" for="unitNum">Unit Number</label>
+            <div class="auth-input-wrap">
+              <span class="auth-input-icon">🏢</span>
+              <input type="text" class="auth-input" id="unitNum" placeholder="e.g. Unit 2-A, Block A" />
+            </div>
+            <div class="field-error" id="unitNumErr">⚠ Please enter your unit number.</div>
+          </div>
+        </div>
+
+        <div id="landlordExtra" style="display:none;">
+          <div class="auth-notice info">
+            <span class="auth-notice-icon">📊</span>
+            <p>As a <strong>Landlord</strong> you can manage all units, track finances, and review maintenance tickets.</p>
+          </div>
+          <div class="auth-field">
+            <label class="auth-label" for="propertyName">Property / Block Name</label>
+            <div class="auth-input-wrap">
+              <span class="auth-input-icon">🏘️</span>
+              <input type="text" class="auth-input" id="propertyName" placeholder="e.g. Block A, Sunrise Residences" />
+            </div>
+            <div class="field-error" id="propertyNameErr">⚠ Please enter your property name.</div>
+          </div>
+        </div>
+
+        <div id="adminExtra" style="display:none;">
+          <div class="auth-notice warning">
+            <span class="auth-notice-icon">⚠️</span>
+            <p>Admin accounts require an <strong>access code</strong> from your system administrator. Demo code: <code style="font-family:monospace;background:rgba(255,255,255,0.08);padding:0.1rem 0.4rem;border-radius:3px;color:var(--accent-orange);">ADMIN-2026</code></p>
+          </div>
+          <div class="auth-field">
+            <label class="auth-label" for="adminCode">Admin Access Code <span style="color:var(--accent-red);">*</span></label>
+            <div class="auth-input-wrap">
+              <span class="auth-input-icon">🔑</span>
+              <input type="text" class="auth-input" id="adminCode" placeholder="Enter your access code" />
+            </div>
+            <div class="field-error" id="adminCodeErr">⚠ Invalid access code.</div>
+          </div>
+        </div>
+
+        <button type="button" class="auth-btn" onclick="toStep2()">Continue →</button>
+      </div>
+
+      <!-- ══════ STEP 2 — Personal Details ══════ -->
+      <div id="step2" style="display:none;">
+        <div class="auth-card-header">
+          <h1>Your details</h1>
+          <p>Fill in your personal information to set up your account.</p>
+        </div>
+
+        <div class="name-row">
+          <div class="auth-field">
+            <label class="auth-label" for="firstName">First Name <span style="color:var(--accent-red);">*</span></label>
+            <div class="auth-input-wrap">
+              <span class="auth-input-icon">👤</span>
+              <input type="text" class="auth-input" id="firstName" placeholder="Juan" autocomplete="given-name" />
+            </div>
+            <div class="field-error" id="firstNameErr">⚠ First name is required.</div>
+          </div>
+          <div class="auth-field">
+            <label class="auth-label" for="lastName">Last Name <span style="color:var(--accent-red);">*</span></label>
+            <div class="auth-input-wrap">
+              <span class="auth-input-icon">👤</span>
+              <input type="text" class="auth-input" id="lastName" placeholder="Dela Cruz" autocomplete="family-name" />
+            </div>
+            <div class="field-error" id="lastNameErr">⚠ Last name is required.</div>
+          </div>
+        </div>
+
+        <div class="auth-field">
+          <label class="auth-label" for="signupEmail">Email Address <span style="color:var(--accent-red);">*</span></label>
+          <div class="auth-input-wrap">
+            <span class="auth-input-icon">✉️</span>
+            <input type="email" class="auth-input" id="signupEmail" placeholder="you@example.com" autocomplete="email" />
+          </div>
+          <div class="field-error" id="signupEmailErr">⚠ Please enter a valid email address.</div>
+        </div>
+
+        <div class="auth-field">
+          <label class="auth-label" for="phone">Phone Number</label>
+          <div class="auth-input-wrap">
+            <span class="auth-input-icon">📱</span>
+            <input type="tel" class="auth-input" id="phone" placeholder="0917-123-4567" autocomplete="tel" />
+          </div>
+          <div class="field-error" id="phoneErr">⚠ Enter a valid PH phone number (e.g. 09XX-XXX-XXXX).</div>
+        </div>
+
+        <div class="auth-field">
+          <label class="auth-label" for="birthdate">Date of Birth</label>
+          <div class="auth-input-wrap">
+            <span class="auth-input-icon">🎂</span>
+            <input type="date" class="auth-input" id="birthdate" />
+          </div>
+          <div class="field-error" id="birthdateErr">⚠ You must be at least 18 years old.</div>
+        </div>
+
+        <div style="display:flex;gap:0.75rem;margin-top:0.5rem;">
+          <button type="button" onclick="toStep1()" style="
+            flex:0 0 auto;width:auto;padding:0.85rem 1.2rem;
+            background:transparent;border:1px solid rgba(255,255,255,0.12);
+            color:var(--text-gray);border-radius:var(--radius-sm);
+            font-family:var(--font-body);font-size:0.9rem;font-weight:600;
+            cursor:pointer;transition:background 0.18s,color 0.18s;
+          " onmouseover="this.style.background='rgba(255,255,255,0.06)';this.style.color='var(--text-white)'"
+             onmouseout="this.style.background='transparent';this.style.color='var(--text-gray)'">← Back</button>
+          <button type="button" class="auth-btn" onclick="toStep3()" style="flex:1;">Continue →</button>
+        </div>
+      </div>
+
+      <!-- ══════ STEP 3 — Password ══════ -->
+      <div id="step3" style="display:none;">
+        <div class="auth-card-header">
+          <h1>Secure your account</h1>
+          <p>Create a strong password to protect your RentLink account.</p>
+        </div>
+
+        <div class="auth-field">
+          <label class="auth-label" for="newPass">Password <span style="color:var(--accent-red);">*</span></label>
+          <div class="auth-input-wrap">
+            <span class="auth-input-icon">🔒</span>
+            <input type="password" class="auth-input" id="newPass" placeholder="Create a strong password" oninput="onPassInput()" />
+            <button type="button" class="auth-input-toggle" id="eyeNew" onclick="togglePw('newPass','eyeNew')">👁️</button>
+          </div>
+          <div class="field-error" id="newPassErr">⚠ Password must meet all requirements.</div>
+          <!-- Strength bar -->
+          <div class="strength-wrap" id="strengthWrap" style="display:none;margin-top:0.6rem;">
+            <div class="strength-track"><div class="strength-fill" id="strengthFill"></div></div>
+            <span class="strength-label" id="strengthLabel"></span>
+          </div>
+        </div>
+
+        <div class="auth-field">
+          <label class="auth-label" for="confirmPass">Confirm Password <span style="color:var(--accent-red);">*</span></label>
+          <div class="auth-input-wrap">
+            <span class="auth-input-icon">🔒</span>
+            <input type="password" class="auth-input" id="confirmPass" placeholder="Re-enter your password" />
+            <button type="button" class="auth-input-toggle" id="eyeConf" onclick="togglePw('confirmPass','eyeConf')">👁️</button>
+          </div>
+          <div class="field-error" id="confirmPassErr">⚠ Passwords do not match.</div>
+        </div>
+
+        <!-- Requirements checklist -->
+        <div style="background:rgba(0,0,0,0.14);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.85rem 1rem;margin-bottom:1.1rem;">
+          <p style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--text-muted);margin-bottom:0.6rem;">Password requirements</p>
+          <div class="req-list">
+            <div class="req-item" id="r1"><span class="req-dot"></span>At least 8 characters</div>
+            <div class="req-item" id="r2"><span class="req-dot"></span>One uppercase letter (A–Z)</div>
+            <div class="req-item" id="r3"><span class="req-dot"></span>One number (0–9)</div>
+            <div class="req-item" id="r4"><span class="req-dot"></span>One special character (!@#$%^&amp;*)</div>
+          </div>
+        </div>
+
+        <!-- Terms -->
+        <div class="auth-terms">
+          <input type="checkbox" id="terms" />
+          <p class="auth-terms-text">
+            I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a> of RentLink Portal.
+            My data will be used for property management purposes only.
+          </p>
+        </div>
+        <div class="field-error" id="termsErr">⚠ You must agree to the Terms of Service to continue.</div>
+
+        <div style="display:flex;gap:0.75rem;margin-top:0.25rem;">
+          <button type="button" onclick="toStep2()" style="
+            flex:0 0 auto;width:auto;padding:0.85rem 1.2rem;
+            background:transparent;border:1px solid rgba(255,255,255,0.12);
+            color:var(--text-gray);border-radius:var(--radius-sm);
+            font-family:var(--font-body);font-size:0.9rem;font-weight:600;
+            cursor:pointer;transition:background 0.18s,color 0.18s;
+          " onmouseover="this.style.background='rgba(255,255,255,0.06)';this.style.color='var(--text-white)'"
+             onmouseout="this.style.background='transparent';this.style.color='var(--text-gray)'">← Back</button>
+          <button type="button" class="auth-btn" onclick="submitSignup()" style="flex:1;" id="createBtn">
+            <div class="spinner"></div>
+            <span class="btn-text">✓ Create Account</span>
+          </button>
+        </div>
+      </div>
+
+    </div><!-- /auth-card -->
+
+    <div class="auth-footer">
+      Already have an account?
+      <a href="login.html">Sign in here</a>
+    </div>
+
+  </div>
+
+  <p class="auth-copyright">© 2026 RentLink Portal · Block A · All rights reserved</p>
+
+  <script>
+    const get = id => document.getElementById(id);
+
+    /* ── Step state ── */
+    let currentStep = 1;
+    let selectedRole = 'tenant';
+
+    /* ── Role selector ── */
+    document.querySelectorAll('.role-option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        document.querySelectorAll('.role-option').forEach(o => o.classList.remove('selected'));
+        opt.classList.add('selected');
+        opt.querySelector('input').checked = true;
+        selectedRole = opt.dataset.role;
+        get('tenantExtra').style.display   = selectedRole === 'tenant'   ? 'block' : 'none';
+        get('landlordExtra').style.display = selectedRole === 'landlord' ? 'block' : 'none';
+        get('adminExtra').style.display    = selectedRole === 'admin'    ? 'block' : 'none';
+      });
+    });
+
+    /* ── Step UI update ── */
+    function updateStepBar(n) {
+      [1,2,3].forEach(i => {
+        const dot = get('dot'+i), lbl = get('lbl'+i);
+        dot.classList.remove('active','done');
+        lbl.classList.remove('active');
+        if (i < n)       { dot.classList.add('done'); dot.textContent = '✓'; }
+        else if (i === n){ dot.classList.add('active'); dot.textContent = i; lbl.classList.add('active'); }
+        else             { dot.textContent = i; }
+      });
+      [1,2].forEach(i => {
+        get('line'+i).classList.toggle('done', i < n);
+      });
+    }
+
+    function showStep(n) {
+      [1,2,3].forEach(i => get('step'+i).style.display = i === n ? 'block' : 'none');
+      updateStepBar(n);
+      currentStep = n;
+    }
+
+    /* ── Field error helpers ── */
+    function setErr(id, errId, show, msg) {
+      const input = get(id), err = get(errId);
+      if (show) {
+        input.classList.add('error');
+        err.innerHTML = '⚠ ' + msg;
+        err.classList.add('show');
+      } else {
+        input.classList.remove('error');
+        err.classList.remove('show');
+      }
+    }
+
+    function cardShake() {
+      get('signupCard').classList.add('shake');
+      setTimeout(() => get('signupCard').classList.remove('shake'), 450);
+    }
+
+    /* ── Navigation with validation ── */
+    function toStep1() { showStep(1); }
+
+    function toStep2() {
+      let bad = false;
+      if (selectedRole === 'admin') {
+        if (!get('adminCode').value.trim()) {
+          setErr('adminCode','adminCodeErr',true,'Access code is required.');
+          bad = true;
+        } else if (get('adminCode').value.trim().toUpperCase() !== 'ADMIN-2026') {
+          setErr('adminCode','adminCodeErr',true,'Invalid access code. Use ADMIN-2026 for demo.');
+          bad = true;
+        } else {
+          setErr('adminCode','adminCodeErr',false);
+        }
+      }
+      if (selectedRole === 'tenant' && !get('unitNum').value.trim()) {
+        setErr('unitNum','unitNumErr',true,'Unit number is required.'); bad = true;
+      } else if (selectedRole === 'tenant') {
+        setErr('unitNum','unitNumErr',false);
+      }
+      if (selectedRole === 'landlord' && !get('propertyName').value.trim()) {
+        setErr('propertyName','propertyNameErr',true,'Property name is required.'); bad = true;
+      } else if (selectedRole === 'landlord') {
+        setErr('propertyName','propertyNameErr',false);
+      }
+      if (bad) { cardShake(); return; }
+      showStep(2);
+    }
+
+    function toStep3() {
+      let bad = false;
+
+      const fn = get('firstName').value.trim();
+      const ln = get('lastName').value.trim();
+      const em = get('signupEmail').value.trim();
+      const ph = get('phone').value.trim();
+      const bd = get('birthdate').value;
+
+      if (!fn) { setErr('firstName','firstNameErr',true,'First name is required.'); bad=true; } else { setErr('firstName','firstNameErr',false); }
+      if (!ln) { setErr('lastName','lastNameErr',true,'Last name is required.'); bad=true; }    else { setErr('lastName','lastNameErr',false); }
+
+      if (!em) {
+        setErr('signupEmail','signupEmailErr',true,'Email address is required.'); bad=true;
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) {
+        setErr('signupEmail','signupEmailErr',true,'Please enter a valid email address.'); bad=true;
+      } else {
+        setErr('signupEmail','signupEmailErr',false);
+      }
+
+      if (ph && !/^(09|\+639)\d{9}$/.test(ph.replace(/[-\s]/g,''))) {
+        setErr('phone','phoneErr',true,'Enter a valid PH number (e.g. 09171234567).'); bad=true;
+      } else {
+        setErr('phone','phoneErr',false);
+      }
+
+      if (bd) {
+        const age = Math.floor((Date.now() - new Date(bd)) / (365.25*24*3600*1000));
+        if (age < 18) { setErr('birthdate','birthdateErr',true,'You must be at least 18 years old.'); bad=true; }
+        else { setErr('birthdate','birthdateErr',false); }
+      }
+
+      if (bad) { cardShake(); return; }
+      showStep(3);
+    }
+
+    /* ── Password toggle ── */
+    function togglePw(fieldId, btnId) {
+      const f = get(fieldId), b = get(btnId);
+      const show = f.type === 'password';
+      f.type = show ? 'text' : 'password';
+      b.textContent = show ? '🙈' : '👁️';
+    }
+
+    /* ── Password strength + requirement checks ── */
+    function onPassInput() {
+      const val = get('newPass').value;
+      const wrap = get('strengthWrap');
+      wrap.style.display = val.length > 0 ? 'block' : 'none';
+
+      const checks = [
+        val.length >= 8,
+        /[A-Z]/.test(val),
+        /[0-9]/.test(val),
+        /[!@#$%^&*]/.test(val),
+      ];
+      ['r1','r2','r3','r4'].forEach((id,i) => {
+        get(id).classList.toggle('ok', checks[i]);
+      });
+
+      const score = checks.filter(Boolean).length;
+      const levels = ['weak','weak','fair','good','strong'];
+      const labels = ['','Weak','Fair','Good','Strong'];
+      get('strengthFill').className = 'strength-fill ' + levels[score];
+      get('strengthLabel').className = 'strength-label ' + levels[score];
+      get('strengthLabel').textContent = labels[score];
+
+      /* Clear error on typing */
+      setErr('newPass','newPassErr',false);
+    }
+
+    /* ── Submit ── */
+    function submitSignup() {
+      let bad = false;
+
+      const pass    = get('newPass').value;
+      const confirm = get('confirmPass').value;
+      const terms   = get('terms').checked;
+
+      const passChecks = [
+        pass.length >= 8,
+        /[A-Z]/.test(pass),
+        /[0-9]/.test(pass),
+        /[!@#$%^&*]/.test(pass),
+      ];
+      if (!pass || passChecks.filter(Boolean).length < 4) {
+        setErr('newPass','newPassErr',true,'Password must meet all 4 requirements above.'); bad=true;
+      } else {
+        setErr('newPass','newPassErr',false);
+      }
+
+      if (!confirm) {
+        setErr('confirmPass','confirmPassErr',true,'Please confirm your password.'); bad=true;
+      } else if (pass !== confirm) {
+        setErr('confirmPass','confirmPassErr',true,'Passwords do not match.'); bad=true;
+      } else {
+        setErr('confirmPass','confirmPassErr',false);
+      }
+
+      if (!terms) {
+        get('termsErr').classList.add('show'); bad=true;
+      } else {
+        get('termsErr').classList.remove('show');
+      }
+
+      if (bad) { cardShake(); return; }
+
+      /* Loading */
+      const btn = get('createBtn');
+      btn.classList.add('loading');
+
+      /* Simulate account creation */
+      setTimeout(() => {
+        btn.classList.remove('loading');
+        /* Store new account for login to work immediately */
+        try {
+          const accounts = JSON.parse(localStorage.getItem('rl_accounts') || '{}');
+          const email = get('signupEmail').value.trim().toLowerCase();
+          const roleMap = { tenant: 'tenant/index.html', landlord: 'landlord/index.html', admin: 'admin/index.html' };
+          accounts[email] = {
+            password: pass,
+            name: get('firstName').value.trim() + ' ' + get('lastName').value.trim(),
+            role: selectedRole,
+            dest: roleMap[selectedRole],
+          };
+          localStorage.setItem('rl_accounts', JSON.stringify(accounts));
+        } catch(e) {}
+        get('successOverlay').classList.add('show');
+      }, 600);
+    }
+
+    /* ── Auto-clear errors on input ── */
+    ['firstName','lastName','signupEmail','phone','birthdate','newPass','confirmPass'].forEach(id => {
+      const el = get(id);
+      if (el) el.addEventListener('input', () => {
+        el.classList.remove('error');
+        const errEl = get(id+'Err');
+        if (errEl) errEl.classList.remove('show');
+      });
+    });
+    get('terms').addEventListener('change', () => get('termsErr').classList.remove('show'));
+  </script>
+
+</body>
+</html>

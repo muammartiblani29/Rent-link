@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RentLink — Settings</title>
+  <link rel="stylesheet" href="../Assets/CSS/main-style.css" />
+  <link rel="stylesheet" href="../Assets/CSS/navigation.css" />
+  <link rel="stylesheet" href="../Assets/CSS/forms.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><div class="logo-mark">RL</div><span class="logo-name">Rent<span>Link</span></span></a>
+      <nav class="main-nav">
+        <a href="../tenant/index.html"   class="nav-link">Tenant</a>
+        <a href="../landlord/index.html" class="nav-link">Landlord</a>
+        <a href="../admin/index.html"    class="nav-link active">Admin</a>
+      </nav>
+      <div class="nav-right"><span class="role-badge admin">Admin</span><div class="nav-avatar">AD</div></div>
+    </div>
+  </header>
+
+  <nav class="sub-nav">
+    <div class="sub-nav-inner">
+      <a href="../index.html"           class="sub-nav-link">Home</a>
+      <a href="admin-dashboard.html" class="sub-nav-link">Dashboard</a>
+      <a href="admin-broadcast.html" class="sub-nav-link">Broadcast</a>
+      <a href="admin-tenants.html"   class="sub-nav-link">Tenants</a>
+      <a href="admin-settings.html"  class="sub-nav-link active">Settings</a>
+      <a href="admin-logs.html"      class="sub-nav-link">Logs</a>
+    </div>
+  </nav>
+
+  <main class="page-wrapper">
+
+    <div class="breadcrumb">
+      <a href="../index.html">RentLink</a><span class="breadcrumb-sep">›</span>
+      <a href="index.html">Admin</a><span class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current">Settings</span>
+    </div>
+
+    <div class="page-header fade-up">
+      <div class="page-header-text"><h1>Portal Settings</h1><p>Configure rent defaults, late fees, due dates, and portal preferences.</p></div>
+    </div>
+
+    <div class="grid-2 fade-up-2">
+
+      <!-- Rent & Payment Settings -->
+      <div class="form-card">
+        <div class="form-card-header">
+          <span class="section-label">Rent & Payments</span>
+          <h2>Payment Configuration</h2>
+          <p>Default values applied to all units unless overridden per unit.</p>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="due-day">Monthly Due Day <span class="req">*</span></label>
+            <input type="number" class="form-input" id="due-day" value="1" min="1" max="31" />
+            <p class="field-hint">Day of month rent is due (e.g. 1 = 1st of month)</p>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="grace-period">Grace Period (days)</label>
+            <input type="number" class="form-input" id="grace-period" value="5" min="0" max="15" />
+            <p class="field-hint">Days after due date before late fee kicks in</p>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="late-fee">Late Fee per Day <span class="req">*</span></label>
+            <div class="input-icon-wrap">
+              <span class="input-icon">₱</span>
+              <input type="number" class="form-input" id="late-fee" value="500" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="max-late">Max Late Fee Cap</label>
+            <div class="input-icon-wrap">
+              <span class="input-icon">₱</span>
+              <input type="number" class="form-input" id="max-late" value="5000" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Accepted Payment Methods</label>
+          <div class="check-group">
+            <label class="check-pill selected"><input type="checkbox" checked />GCash</label>
+            <label class="check-pill selected"><input type="checkbox" checked />Bank Transfer</label>
+            <label class="check-pill selected"><input type="checkbox" checked />Maya</label>
+            <label class="check-pill selected"><input type="checkbox" checked />Cash</label>
+            <label class="check-pill"><input type="checkbox" />Check</label>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-secondary">Reset</button>
+          <button class="btn btn-primary">Save Payment Settings →</button>
+        </div>
+      </div>
+
+      <!-- Portal & Notification Settings -->
+      <div style="display:flex;flex-direction:column;gap:1.5rem;">
+
+        <div class="form-card" style="margin-bottom:0;">
+          <div class="form-card-header">
+            <span class="section-label">Property</span>
+            <h2>Property Info</h2>
+            <p>Basic details about the property shown across the portal.</p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="prop-name">Property Name</label>
+            <input type="text" class="form-input" id="prop-name" value="Block A — RentLink" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="prop-address">Address</label>
+            <input type="text" class="form-input" id="prop-address" placeholder="Full address of the property" />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="landlord-name">Landlord Name</label>
+              <input type="text" class="form-input" id="landlord-name" value="Ricardo Dela Cruz" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="landlord-contact">Contact Number</label>
+              <input type="text" class="form-input" id="landlord-contact" value="0917-123-4567" />
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-primary">Save Property Info →</button>
+          </div>
+        </div>
+
+        <div class="form-card" style="margin-bottom:0;">
+          <div class="form-card-header">
+            <span class="section-label">Notifications</span>
+            <h2>Auto-Reminders</h2>
+            <p>Portal auto-sends reminders to tenants based on these rules.</p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Send rent reminder</label>
+            <div class="select-wrap">
+              <select class="form-select">
+                <option>5 days before due date</option>
+                <option>3 days before due date</option>
+                <option>1 day before due date</option>
+                <option>On the due date</option>
+                <option>Disabled</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Send overdue notice</label>
+            <div class="select-wrap">
+              <select class="form-select">
+                <option>1 day after grace period</option>
+                <option>3 days after grace period</option>
+                <option>Disabled</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-primary">Save Notification Settings →</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Danger Zone -->
+    <div class="card fade-up-4" style="margin-top:1.5rem;border-color:rgba(231,76,60,0.2);">
+      <span class="section-label" style="color:var(--accent-red);">Danger Zone</span>
+      <h2 style="margin-bottom:0.5rem;">Destructive Actions</h2>
+      <p style="margin-bottom:1.25rem;font-size:0.85rem;color:var(--text-muted);">These actions cannot be undone. Proceed with extreme caution.</p>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        <button class="btn btn-danger">Clear All Ticket Logs</button>
+        <button class="btn btn-danger">Reset All Payment Records</button>
+        <button class="btn btn-danger">Delete All Broadcast History</button>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand"><div class="footer-brand-dot"></div><span class="footer-copy">© 2026 RentLink Portal — Admin View</span></div>
+      <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Support</a></div>
+    </div>
+  </footer>
+</body>
+</html>

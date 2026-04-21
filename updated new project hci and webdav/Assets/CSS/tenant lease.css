@@ -1,0 +1,43 @@
+
+    .lease-detail-grid { 
+        display: grid; 
+        grid-template-columns: 1fr 1fr; 
+        gap: 0; }
+    .lease-detail-row {
+      padding: 0.9rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .lease-detail-row:nth-child(odd) { padding-right: 2rem; }
+    .lease-detail-row:last-child, .lease-detail-row:nth-last-child(2) { border-bottom: none; }
+    .lease-key   {
+         font-size: 0.72rem; 
+         font-weight: 700; 
+         text-transform: uppercase; 
+         letter-spacing: 0.08em; color: var(--text-muted); 
+        }
+    .lease-value { 
+        font-size: 0.9rem; 
+        font-weight: 500; color: var(--text-white); 
+    }
+    .rules-list { 
+        list-style: none; 
+        display: flex; 
+        flex-direction: column; 
+        gap: 0.6rem; 
+    }
+    .rules-list li { 
+        font-size: 0.875rem; 
+        color: var(--text-gray); 
+        display: flex; 
+        gap: 0.65rem; 
+        align-items: flex-start; }
+    .rules-list li::before { 
+        content: '→'; 
+        color: var(--accent-mint); 
+        font-weight: 700; 
+        flex-shrink: 0;
+     }
+    @media (max-width: 560px) { .lease-detail-grid { grid-template-columns: 1fr; } }

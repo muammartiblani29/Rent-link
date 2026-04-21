@@ -1,0 +1,324 @@
+/* ================================================
+   dashboard-cards.css — Stats, Units, Tickets, Overview
+   ================================================ */
+
+/* ── Stat Grid ────────────────────────────────── */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+.stat-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow);
+}
+
+/* Top color strip */
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.stat-card.green::before  { background: linear-gradient(90deg, #27AE60, #2ECC71); }
+.stat-card.blue::before   { background: linear-gradient(90deg, #2980b9, #5dade2); }
+.stat-card.orange::before { background: linear-gradient(90deg, #d35400, #e67e22); }
+.stat-card.red::before    { background: linear-gradient(90deg, #922b21, #e74c3c); }
+.stat-card.teal::before   { background: linear-gradient(90deg, #0e7c5b, #1abc9c); }
+
+.stat-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  display: block;
+  opacity: 0.85;
+}
+
+.stat-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+
+.stat-value {
+  font-family: var(--font-head);
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--text-white);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.03em;
+}
+
+.stat-change {
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.stat-change.up   { color: var(--accent-mint); }
+.stat-change.down { color: var(--accent-red); }
+.stat-change.flat { color: var(--text-muted); }
+
+/* ── Financial Overview ───────────────────────── */
+.finance-table { width: 100%; border-collapse: collapse; }
+
+.finance-table tr {
+  border-bottom: 1px solid var(--border);
+  transition: background var(--transition);
+}
+.finance-table tr:last-child { border-bottom: none; }
+.finance-table tr:hover { background: rgba(255,255,255,0.02); }
+
+.finance-table td {
+  padding: 0.85rem 0.25rem;
+  font-size: 0.88rem;
+}
+.finance-table td:first-child { color: var(--text-gray); }
+.finance-table td:last-child  { text-align: right; font-family: var(--font-head); font-weight: 600; }
+
+.ft-income  { color: var(--accent-mint) !important; }
+.ft-expense { color: var(--accent-red)  !important; }
+.ft-net     { color: var(--accent-blue) !important; font-size: 1rem !important; }
+.ft-pending { color: var(--accent-orange) !important; }
+.ft-total   { color: var(--text-white) !important; }
+
+/* ── Progress Bar ─────────────────────────────── */
+.progress-block { margin-top: 1.5rem; }
+
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.progress-track {
+  height: 7px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--accent-green), var(--accent-mint));
+  transition: width 0.6s ease;
+}
+.progress-fill.blue   { background: linear-gradient(90deg, #2980b9, #5dade2); }
+.progress-fill.orange { background: linear-gradient(90deg, #d35400, #e67e22); }
+
+/* ── Ticket List ──────────────────────────────── */
+.ticket-list { display: flex; flex-direction: column; gap: 0.65rem; }
+
+.ticket-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+  transition: border-color var(--transition), background var(--transition);
+}
+.ticket-row:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-card-hover);
+}
+
+.ticket-id {
+  font-family: 'Courier New', monospace;
+  font-size: 0.73rem;
+  font-weight: 700;
+  color: var(--accent-mint);
+  background: rgba(46,204,113,0.08);
+  border: 1px solid rgba(46,204,113,0.15);
+  padding: 0.18rem 0.5rem;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.ticket-info-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-white);
+  margin-bottom: 0.15rem;
+}
+
+.ticket-info-sub {
+  font-size: 0.73rem;
+  color: var(--text-muted);
+}
+
+.ticket-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* ── Unit Cards ───────────────────────────────── */
+.units-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.1rem;
+}
+
+.unit-card {
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.unit-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow);
+}
+
+.unit-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.unit-num {
+  font-family: var(--font-head);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-white);
+}
+
+.unit-floor-tag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.05);
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
+.unit-tenant-name {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-gray);
+  margin-bottom: 0.2rem;
+}
+
+.unit-rent-amt {
+  font-family: var(--font-head);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent-mint);
+  margin-bottom: 0.75rem;
+}
+
+.unit-status {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.status-dot.paid    { background: var(--accent-mint); box-shadow: 0 0 6px rgba(46,204,113,0.5); }
+.status-dot.pending { background: var(--accent-orange); }
+.status-dot.vacant  { background: var(--text-muted); }
+.status-dot.overdue { background: var(--accent-red); }
+
+/* ── Activity Feed ────────────────────────────── */
+.activity-feed { display: flex; flex-direction: column; }
+
+.activity-item {
+  display: flex;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.activity-item:last-child { border-bottom: none; }
+
+.activity-dot-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  flex-shrink: 0;
+  padding-top: 0.25rem;
+}
+
+.activity-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.activity-dot.green  { background: var(--accent-mint); }
+.activity-dot.orange { background: var(--accent-orange); }
+.activity-dot.blue   { background: var(--accent-blue); }
+.activity-dot.red    { background: var(--accent-red); }
+
+.activity-title {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-white);
+  margin-bottom: 0.15rem;
+}
+
+.activity-time { font-size: 0.72rem; color: var(--text-muted); }
+
+/* ── Chart Bar (CSS only) ─────────────────────── */
+.bar-chart { display: flex; align-items: flex-end; gap: 0.6rem; height: 120px; margin-top: 1rem; }
+
+.bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+
+.bar-fill {
+  width: 100%;
+  border-radius: 4px 4px 0 0;
+  background: linear-gradient(180deg, var(--accent-mint), var(--accent-green));
+  transition: height 0.5s ease;
+  min-height: 4px;
+}
+.bar-fill.dim { background: rgba(255,255,255,0.08); }
+
+.bar-label { font-size: 0.65rem; color: var(--text-muted); }
+
+/* ── Responsive ───────────────────────────────── */
+@media (max-width: 1000px) {
+  .stat-grid  { grid-template-columns: repeat(2, 1fr); }
+  .units-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .stat-grid  { grid-template-columns: 1fr; }
+  .units-grid { grid-template-columns: 1fr; }
+  .ticket-row { grid-template-columns: 1fr; }
+}

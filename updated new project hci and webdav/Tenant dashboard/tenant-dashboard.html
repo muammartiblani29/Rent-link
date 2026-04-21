@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RentLink — Tenant Dashboard</title>
+  <link rel="stylesheet" href="../Assets/CSS/main-style.css" />
+  <link rel="stylesheet" href="../Assets/CSS/navigation.css" />
+  <link rel="stylesheet" href="../Assets/CSS/dashboard-cards.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">
+        <div class="logo-mark">RL</div>
+        <span class="logo-name">Rent<span>Link</span></span>
+      </a>
+      <nav class="main-nav">
+        <a href="#" class="nav-link active">Home</a>
+        <a href="#" class="nav-link">About us</a>
+        <a href="#" class="nav-link">Contacts</a>
+      </nav>
+      <div class="nav-right">
+        <span class="role-badge tenant">Tenant</span>
+        <div class="nav-avatar">MS</div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="sub-nav">
+    <div class="sub-nav-inner">
+      <a href="index.html"              class="sub-nav-link">Home</a>
+      <a href="tenant-dashboard.html"   class="sub-nav-link active">Dashboard</a>
+      <a href="tenant-tickets.html"     class="sub-nav-link">My Tickets</a>
+      <a href="tenant-payments.html"    class="sub-nav-link">Payments</a>
+      <a href="tenant-lease.html"       class="sub-nav-link">Lease Info</a>
+      <a href="tenant-notices.html"     class="sub-nav-link">Notices</a>
+    </div>
+  </nav>
+
+  <main class="page-wrapper">
+
+    <div class="breadcrumb">
+      <a href="../index.html">RentLink</a>
+      <span class="breadcrumb-sep">›</span>
+      <a href="index.html">Tenant</a>
+      <span class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current">Dashboard</span>
+    </div>
+
+    <div class="page-header fade-up">
+      <div class="page-header-text">
+        <h1>My Dashboard</h1>
+        <p>Unit 2-A, Block A · Lease active until December 2026</p>
+      </div>
+      <a href="tenant-payments.html" class="btn btn-primary btn-sm">Upload Receipt</a>
+    </div>
+
+    <!-- Stats -->
+    <div class="stat-grid fade-up-2">
+      <div class="stat-card green">
+        <span class="stat-icon">💰</span>
+        <div class="stat-label">April Rent</div>
+        <div class="stat-value">Paid</div>
+        <div class="stat-change up">✓ Confirmed Apr 3</div>
+      </div>
+      <div class="stat-card orange">
+        <span class="stat-icon">🔧</span>
+        <div class="stat-label">Active Tickets</div>
+        <div class="stat-value">2</div>
+        <div class="stat-change flat">1 in progress</div>
+      </div>
+      <div class="stat-card blue">
+        <span class="stat-icon">📅</span>
+        <div class="stat-label">Next Due</div>
+        <div class="stat-value">May 1</div>
+        <div class="stat-change flat">₱13,000</div>
+      </div>
+      <div class="stat-card teal">
+        <span class="stat-icon">📋</span>
+        <div class="stat-label">Months Rented</div>
+        <div class="stat-value">16</div>
+        <div class="stat-change up">Good standing</div>
+      </div>
+    </div>
+
+    <div class="grid-2 fade-up-3">
+
+      <!-- Rent Payment Summary -->
+      <div class="card">
+        <span class="section-label">Payments</span>
+        <h2 style="margin-bottom:1.25rem;">Recent Payments</h2>
+
+        <table class="finance-table" style="width:100%">
+          <tr>
+            <td>April 2026</td>
+            <td class="ft-income">₱13,000</td>
+          </tr>
+          <tr>
+            <td>March 2026</td>
+            <td class="ft-income">₱13,000</td>
+          </tr>
+          <tr>
+            <td>February 2026</td>
+            <td class="ft-income">₱13,000</td>
+          </tr>
+          <tr>
+            <td>January 2026</td>
+            <td class="ft-income">₱13,000</td>
+          </tr>
+          <tr>
+            <td>December 2025</td>
+            <td class="ft-income">₱13,000</td>
+          </tr>
+        </table>
+
+        <div class="progress-block">
+          <div class="progress-meta"><span>On-time rate</span><span>100%</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="card">
+        <span class="section-label">Activity</span>
+        <h2 style="margin-bottom:1.25rem;">Recent Activity</h2>
+        <div class="activity-feed">
+          <div class="activity-item">
+            <div class="activity-dot-wrap"><div class="activity-dot green"></div></div>
+            <div>
+              <div class="activity-title">April rent confirmed</div>
+              <div class="activity-time">April 3, 2026 · 10:22 AM</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot-wrap"><div class="activity-dot orange"></div></div>
+            <div>
+              <div class="activity-title">Ticket #TKT-0041 opened — leaking faucet</div>
+              <div class="activity-time">April 10, 2026 · 9:05 AM</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot-wrap"><div class="activity-dot blue"></div></div>
+            <div>
+              <div class="activity-title">Broadcast received — water interruption</div>
+              <div class="activity-time">March 28, 2026 · 2:00 PM</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot-wrap"><div class="activity-dot green"></div></div>
+            <div>
+              <div class="activity-title">Ticket #TKT-0031 resolved — door latch</div>
+              <div class="activity-time">March 25, 2026 · 4:30 PM</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot-wrap"><div class="activity-dot green"></div></div>
+            <div>
+              <div class="activity-title">March rent confirmed</div>
+              <div class="activity-time">March 3, 2026 · 11:00 AM</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- My Tickets Summary -->
+    <div class="card fade-up-4" style="margin-top:1.5rem;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
+        <div>
+          <span class="section-label">Maintenance</span>
+          <h2>My Open Tickets</h2>
+        </div>
+        <a href="tenant-tickets.html" class="btn btn-ghost btn-sm">View All →</a>
+      </div>
+      <div class="ticket-list">
+        <div class="ticket-row">
+          <span class="ticket-id">#TKT-0041</span>
+          <div>
+            <div class="ticket-info-title">Leaking kitchen faucet</div>
+            <div class="ticket-info-sub">Category: Plumbing · Submitted Apr 10</div>
+          </div>
+          <div class="ticket-actions"><span class="badge badge-orange">In Progress</span></div>
+        </div>
+        <div class="ticket-row">
+          <span class="ticket-id">#TKT-0038</span>
+          <div>
+            <div class="ticket-info-title">Air conditioning not cooling</div>
+            <div class="ticket-info-sub">Category: Air Con · Submitted Apr 3</div>
+          </div>
+          <div class="ticket-actions"><span class="badge badge-red">Open</span></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-brand-dot"></div>
+        <span class="footer-copy">© 2026 RentLink Portal — Tenant View</span>
+      </div>
+      <div class="footer-links">
+        <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Support</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

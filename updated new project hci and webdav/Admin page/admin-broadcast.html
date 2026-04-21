@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RentLink — Broadcast</title>
+  <link rel="stylesheet" href="../Assets/CSS/main-style.css" />
+  <link rel="stylesheet" href="../Assets/CSS/navigation.css" />
+  <link rel="stylesheet" href="../Assets/CSS/dashboard-cards.css" />
+  <link rel="stylesheet" href="../Assets/CSS/forms.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><div class="logo-mark">RL</div><span class="logo-name">Rent<span>Link</span></span></a>
+      <nav class="main-nav">
+        <a href="../tenant/index.html"   class="nav-link">Tenant</a>
+        <a href="../landlord/index.html" class="nav-link">Landlord</a>
+        <a href="../admin/index.html"    class="nav-link active">Admin</a>
+      </nav>
+      <div class="nav-right"><span class="role-badge admin">Admin</span><div class="nav-avatar">AD</div></div>
+    </div>
+  </header>
+
+  <nav class="sub-nav">
+    <div class="sub-nav-inner">
+      <a href="../index.html"           class="sub-nav-link">Home</a>
+      <a href="admin-dashboard.html" class="sub-nav-link">Dashboard</a>
+      <a href="admin-broadcast.html" class="sub-nav-link active">Broadcast</a>
+      <a href="admin-tenants.html"   class="sub-nav-link">Tenants</a>
+      <a href="admin-settings.html"  class="sub-nav-link">Settings</a>
+      <a href="admin-logs.html"      class="sub-nav-link">Logs</a>
+    </div>
+  </nav>
+
+  <main class="page-wrapper">
+
+    <div class="breadcrumb">
+      <a href="../index.html">RentLink</a><span class="breadcrumb-sep">›</span>
+      <a href="index.html">Admin</a><span class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current">Broadcast</span>
+    </div>
+
+    <div class="page-header fade-up">
+      <div class="page-header-text"><h1>Send Broadcast</h1><p>Send announcements to all tenants or a specific group. All messages are logged.</p></div>
+    </div>
+
+    <div class="grid-2 fade-up-2">
+
+      <!-- Broadcast Form -->
+      <div class="form-card">
+        <div class="form-card-header">
+          <span class="section-label">New Message</span>
+          <h2>Compose Broadcast</h2>
+          <p>Messages appear in each tenant's Notices page immediately.</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="audience">Recipient Group <span class="req">*</span></label>
+          <div class="select-wrap">
+            <select class="form-select" id="audience">
+              <option value="all" selected>📣 All Tenants (8)</option>
+              <option>🏢 Floor 1 Only (3 units)</option>
+              <option>🏢 Floor 2 Only (2 units)</option>
+              <option>🏢 Floor 3 Only (3 units)</option>
+              <option>⚠️ Unpaid Tenants Only (1)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Message Type <span class="req">*</span></label>
+          <div class="check-group">
+            <label class="check-pill selected"><input type="radio" name="mtype" checked />💰 Payment</label>
+            <label class="check-pill"><input type="radio" name="mtype" />🔧 Maintenance</label>
+            <label class="check-pill"><input type="radio" name="mtype" />📋 General</label>
+            <label class="check-pill"><input type="radio" name="mtype" />🚨 Emergency</label>
+            <label class="check-pill"><input type="radio" name="mtype" />🎉 Community</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="bsubject">Subject <span class="req">*</span></label>
+          <input type="text" class="form-input" id="bsubject" placeholder="e.g. Water interruption on April 15" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="bmessage">Message Body <span class="req">*</span></label>
+          <textarea class="form-textarea tall" id="bmessage" placeholder="Type your announcement here. Be clear and concise — tenants will receive this as a notification in their portal."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="bschedule">Schedule Send <span class="hint">Optional — leave blank to send now</span></label>
+          <input type="datetime-local" class="form-input" id="bschedule" />
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-secondary">Save Draft</button>
+          <button class="btn btn-danger">🚨 Send Emergency</button>
+          <button class="btn btn-primary">Send Broadcast →</button>
+        </div>
+      </div>
+
+      <!-- Broadcast History -->
+      <div style="display:flex;flex-direction:column;gap:1.5rem;">
+
+        <div class="card">
+          <span class="section-label">History</span>
+          <h2 style="margin-bottom:1.25rem;">Recent Broadcasts</h2>
+          <div class="ticket-list">
+
+            <div class="ticket-row">
+              <span class="ticket-id">#MSG-018</span>
+              <div>
+                <div class="ticket-info-title">May 2026 rent reminder</div>
+                <div class="ticket-info-sub">Apr 5, 2026 · All Tenants · Payment</div>
+              </div>
+              <span class="badge badge-green">Delivered</span>
+            </div>
+
+            <div class="ticket-row">
+              <span class="ticket-id">#MSG-017</span>
+              <div>
+                <div class="ticket-info-title">Scheduled water interruption</div>
+                <div class="ticket-info-sub">Mar 28, 2026 · All Tenants · Maintenance</div>
+              </div>
+              <span class="badge badge-green">Delivered</span>
+            </div>
+
+            <div class="ticket-row">
+              <span class="ticket-id">#MSG-016</span>
+              <div>
+                <div class="ticket-info-title">Overdue rent notice</div>
+                <div class="ticket-info-sub">Mar 5, 2026 · Unpaid Only · Payment</div>
+              </div>
+              <span class="badge badge-green">Delivered</span>
+            </div>
+
+            <div class="ticket-row">
+              <span class="ticket-id">#MSG-015</span>
+              <div>
+                <div class="ticket-info-title">Updated parking rules</div>
+                <div class="ticket-info-sub">Feb 18, 2026 · All Tenants · General</div>
+              </div>
+              <span class="badge badge-green">Delivered</span>
+            </div>
+
+            <div class="ticket-row">
+              <span class="ticket-id">#MSG-014</span>
+              <div>
+                <div class="ticket-info-title">Happy New Year from management</div>
+                <div class="ticket-info-sub">Jan 1, 2026 · All Tenants · Community</div>
+              </div>
+              <span class="badge badge-green">Delivered</span>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="section-label">Stats</span>
+          <h2 style="margin-bottom:1rem;">Broadcast Summary</h2>
+          <table class="finance-table">
+            <tr><td>Total Sent (All Time)</td><td class="ft-total">18</td></tr>
+            <tr><td>Sent This Month</td><td class="ft-income">1</td></tr>
+            <tr><td>Emergency Alerts</td><td class="ft-expense">0</td></tr>
+            <tr><td>Drafts Saved</td><td class="ft-pending">2</td></tr>
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand"><div class="footer-brand-dot"></div><span class="footer-copy">© 2026 RentLink Portal — Admin View</span></div>
+      <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Support</a></div>
+    </div>
+  </footer>
+</body>
+</html>

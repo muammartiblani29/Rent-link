@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RentLink — Sign In</title>
+   <link rel="stylesheet" href="../Assets/CSS/main-style.css" />
+  <link rel="stylesheet" href="../Assets/CSS/auth.css" />
+  <style>
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      20%     { transform: translateX(-8px); }
+      40%     { transform: translateX(8px); }
+      60%     { transform: translateX(-5px); }
+      80%     { transform: translateX(5px); }
+    }
+    .shake { animation: shake 0.4s ease; }
+
+    .auth-input.error {
+      border-color: var(--accent-red) !important;
+      box-shadow: 0 0 0 3px rgba(231,76,60,0.15) !important;
+    }
+    .field-error {
+      font-size: 0.73rem;
+      color: var(--accent-red);
+      margin-top: 0.35rem;
+      display: none;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .field-error.show { display: flex; }
+
+    .auth-alert {
+      display: none;
+      align-items: flex-start;
+      gap: 0.7rem;
+      padding: 0.9rem 1rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(231,76,60,0.3);
+      background: rgba(231,76,60,0.09);
+      margin-bottom: 1.25rem;
+    }
+    .auth-alert.show { display: flex; }
+    .auth-alert p { font-size: 0.83rem; color: var(--text-gray); margin: 0; line-height: 1.5; }
+    .auth-alert strong { color: var(--text-white); }
+
+    .auth-btn.loading { opacity: 0.75; pointer-events: none; }
+    .auth-btn .spinner {
+      display: none;
+      width: 16px; height: 16px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    .auth-btn.loading .spinner { display: inline-block; }
+    .auth-btn.loading .btn-text { display: none; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .demo-card {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: var(--radius-sm);
+      padding: 0.78rem 1rem;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--text-white);
+      border: 1px solid;
+      transition: background 0.18s, transform 0.14s;
+      text-align: left;
+    }
+    .demo-card:hover { transform: translateY(-1px); }
+    .demo-card:active { transform: translateY(0); }
+    .demo-card.tenant   { background: rgba(39,174,96,0.07);  border-color: rgba(39,174,96,0.2); }
+    .demo-card.tenant:hover  { background: rgba(39,174,96,0.13);  border-color: rgba(39,174,96,0.35); }
+    .demo-card.landlord { background: rgba(52,152,219,0.07); border-color: rgba(52,152,219,0.2); }
+    .demo-card.landlord:hover { background: rgba(52,152,219,0.13); border-color: rgba(52,152,219,0.35); }
+    .demo-card.admin    { background: rgba(230,126,34,0.07); border-color: rgba(230,126,34,0.2); }
+    .demo-card.admin:hover   { background: rgba(230,126,34,0.13); border-color: rgba(230,126,34,0.35); }
+
+    .demo-left { display: flex; align-items: center; gap: 0.65rem; }
+    .demo-role { display: flex; flex-direction: column; gap: 0.06rem; }
+    .demo-name { font-weight: 600; font-size: 0.85rem; color: var(--text-white); }
+    .demo-sub  { font-size: 0.72rem; color: var(--text-muted); }
+    .demo-arr  { font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+    .demo-card.tenant   .demo-arr { color: var(--accent-mint); }
+    .demo-card.landlord .demo-arr { color: #5dade2; }
+    .demo-card.admin    .demo-arr { color: var(--accent-orange); }
+
+    /* success overlay */
+    .success-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(14,22,32,0.93);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .success-overlay.show { display: flex; }
+    .success-circle {
+      width: 72px; height: 72px;
+      background: rgba(39,174,96,0.14);
+      border: 2px solid rgba(39,174,96,0.4);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      animation: successPop 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    @keyframes successPop {
+      from { transform: scale(0.5); opacity: 0; }
+      to   { transform: scale(1);   opacity: 1; }
+    }
+    .success-overlay h2 { color: var(--text-white); font-family: var(--font-head); font-size: 1.15rem; }
+    .success-overlay p  { color: var(--text-muted); font-size: 0.83rem; }
+
+    /* credentials hint box */
+    .cred-hint {
+      background: rgba(0,0,0,0.18);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .cred-hint p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+    .cred-hint code {
+      font-family: 'Courier New', monospace;
+      background: rgba(255,255,255,0.06);
+      padding: 0.1rem 0.35rem;
+      border-radius: 3px;
+      color: var(--accent-mint);
+      font-size: 0.72rem;
+    }
+  </style>
+</head>
+<body class="auth-body">
+
+  <!-- Success overlay -->
+  <div class="success-overlay" id="successOverlay">
+    <div class="success-circle">✓</div>
+    <h2 id="successName">Signing in…</h2>
+    <p>Redirecting to your dashboard…</p>
+  </div>
+
+  <div class="auth-wrap">
+
+    <!-- Brand -->
+    <a href="index.html" class="auth-brand">
+      <div class="auth-logo-mark">RL</div>
+      <span class="auth-logo-name">Rent<span>Link</span></span>
+      <span class="auth-logo-tagline">Property Management Portal</span>
+    </a>
+
+    <!-- Card -->
+    <div class="auth-card" id="loginCard">
+
+      <div class="auth-card-header">
+        <h1>Welcome back</h1>
+        <p>Sign in to your account to access your dashboard.</p>
+      </div>
+
+      <!-- Error alert banner -->
+      <div class="auth-alert" id="alertBanner">
+        <span style="font-size:1rem;flex-shrink:0;">❌</span>
+        <p id="alertMsg"><strong>Incorrect credentials.</strong> Please check your email and password.</p>
+      </div>
+
+      <!-- Credentials hint -->
+      <div class="cred-hint">
+        <p>
+          Demo passwords: Tenant → <code>Tenant@2026</code> &nbsp;·&nbsp;
+          Landlord → <code>Landlord@2026</code> &nbsp;·&nbsp;
+          Admin → <code>Admin@2026</code>
+        </p>
+      </div>
+
+      <!-- FORM -->
+      <form id="loginForm" novalidate>
+
+        <div class="auth-field">
+          <label class="auth-label" for="email">Email Address</label>
+          <div class="auth-input-wrap">
+            <span class="auth-input-icon">✉️</span>
+            <input
+              type="email"
+              class="auth-input"
+              id="email"
+              placeholder="you@example.com"
+              autocomplete="email"
+            />
+          </div>
+          <div class="field-error" id="emailErr">⚠ Please enter a valid email address.</div>
+        </div>
+
+        <div class="auth-field">
+          <label class="auth-label" for="password">Password</label>
+          <div class="auth-input-wrap">
+            <span class="auth-input-icon">🔒</span>
+            <input
+              type="password"
+              class="auth-input"
+              id="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+            />
+            <button type="button" class="auth-input-toggle" id="eyeBtn" onclick="togglePw()">👁️</button>
+          </div>
+          <div class="field-error" id="passErr">⚠ Password cannot be empty.</div>
+        </div>
+
+        <div class="auth-row">
+          <label class="auth-check">
+            <input type="checkbox" id="remember" />
+            <span class="auth-check-label">Remember me</span>
+          </label>
+          <a href="forgot-password.html" class="auth-link">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="auth-btn" id="loginBtn">
+          <div class="spinner"></div>
+          <span class="btn-text">Sign In →</span>
+        </button>
+
+      </form>
+
+      <div class="auth-divider">or use a demo account</div>
+
+      <div style="display:flex;flex-direction:column;gap:0.6rem;">
+
+        <button class="demo-card tenant" onclick="fillDemo('tenant')">
+          <div class="demo-left">
+            <span style="font-size:1.25rem;">🏠</span>
+            <div class="demo-role">
+              <span class="demo-name">Tenant — Maria Santos</span>
+              <span class="demo-sub">tenant@rentlink.ph · Unit 2-A</span>
+            </div>
+          </div>
+          <span class="demo-arr">Fill →</span>
+        </button>
+
+        <button class="demo-card landlord" onclick="fillDemo('landlord')">
+          <div class="demo-left">
+            <span style="font-size:1.25rem;">📊</span>
+            <div class="demo-role">
+              <span class="demo-name">Landlord — Ricardo Dela Cruz</span>
+              <span class="demo-sub">landlord@rentlink.ph · Block A</span>
+            </div>
+          </div>
+          <span class="demo-arr">Fill →</span>
+        </button>
+
+        <button class="demo-card admin" onclick="fillDemo('admin')">
+          <div class="demo-left">
+            <span style="font-size:1.25rem;">⚙️</span>
+            <div class="demo-role">
+              <span class="demo-name">Admin — System Administrator</span>
+              <span class="demo-sub">admin@rentlink.ph · Full Access</span>
+            </div>
+          </div>
+          <span class="demo-arr">Fill →</span>
+        </button>
+
+      </div>
+
+    </div><!-- /auth-card -->
+
+    <div class="auth-footer">
+      Don't have an account?
+      <a href="signup.html">Create one here</a>
+    </div>
+
+  </div><!-- /auth-wrap -->
+
+  <p class="auth-copyright">© 2026 RentLink Portal · Block A · All rights reserved</p>
+
+  <script>
+    /* ── Credential store ── */
+    const ACCOUNTS = {
+      'tenant@rentlink.ph':   { password: 'Tenant@2026',   name: 'Maria Santos',      dest: 'tenant/index.html'   },
+      'landlord@rentlink.ph': { password: 'Landlord@2026', name: 'Ricardo Dela Cruz', dest: 'landlord/index.html' },
+      'admin@rentlink.ph':    { password: 'Admin@2026',    name: 'System Admin',      dest: 'admin/index.html'    },
+    };
+
+    const get = id => document.getElementById(id);
+
+    /* ── Restore remembered email ── */
+    try {
+      const saved = JSON.parse(localStorage.getItem('rl_session') || '{}');
+      if (saved.email) { get('email').value = saved.email; get('remember').checked = true; }
+    } catch(e) {}
+
+    /* ── Toggle password visibility ── */
+    function togglePw() {
+      const f = get('password'), btn = get('eyeBtn');
+      const show = f.type === 'password';
+      f.type = show ? 'text' : 'password';
+      btn.textContent = show ? '🙈' : '👁️';
+    }
+
+    /* ── Fill demo credentials ── */
+    function fillDemo(role) {
+      const creds = {
+        tenant:   { email: 'tenant@rentlink.ph',   pass: 'Tenant@2026'   },
+        landlord: { email: 'landlord@rentlink.ph', pass: 'Landlord@2026' },
+        admin:    { email: 'admin@rentlink.ph',    pass: 'Admin@2026'    },
+      };
+      clearErrors();
+      get('email').value    = creds[role].email;
+      get('password').value = creds[role].pass;
+      get('password').type  = 'text';
+      get('eyeBtn').textContent = '🙈';
+      /* green highlight pulse */
+      [get('email'), get('password')].forEach(el => {
+        el.style.transition   = 'border-color 0.2s, box-shadow 0.2s';
+        el.style.borderColor  = 'var(--accent-green)';
+        el.style.boxShadow    = '0 0 0 3px rgba(39,174,96,0.18)';
+        setTimeout(() => { el.style.borderColor = ''; el.style.boxShadow = ''; }, 1400);
+      });
+    }
+
+    /* ── Error helpers ── */
+    function clearErrors() {
+      ['email','password'].forEach(id => {
+        get(id).classList.remove('error');
+        get(id + 'Err').classList.remove('show');
+      });
+      get('alertBanner').classList.remove('show');
+    }
+
+    function fieldErr(id, msg) {
+      get(id).classList.add('error');
+      const err = get(id + 'Err');
+      err.innerHTML = '⚠ ' + msg;
+      err.classList.add('show');
+    }
+
+    function showAlert(html) {
+      get('alertMsg').innerHTML = html;
+      get('alertBanner').classList.add('show');
+      get('loginCard').classList.add('shake');
+      setTimeout(() => get('loginCard').classList.remove('shake'), 450);
+    }
+
+    /* ── Clear on input ── */
+    get('email').addEventListener('input', clearErrors);
+    get('password').addEventListener('input', clearErrors);
+
+    /* ── Form submit ── */
+    get('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      clearErrors();
+
+      const email = get('email').value.trim().toLowerCase();
+      const pass  = get('password').value;
+      let bad = false;
+
+      /* Validate */
+      if (!email) {
+        fieldErr('email', 'Email address is required.');
+        bad = true;
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        fieldErr('email', 'Please enter a valid email address.');
+        bad = true;
+      }
+      if (!pass) {
+        fieldErr('password', 'Password cannot be empty.');
+        bad = true;
+      }
+
+      if (bad) {
+        get('loginCard').classList.add('shake');
+        setTimeout(() => get('loginCard').classList.remove('shake'), 450);
+        return;
+      }
+
+      /* Loading state */
+      const btn = get('loginBtn');
+      btn.classList.add('loading');
+
+      /* Simulate async auth check */
+      setTimeout(() => {
+        btn.classList.remove('loading');
+        const account = ACCOUNTS[email];
+
+        if (!account) {
+          showAlert('<strong>No account found</strong> for that email. Try a demo account below or <a href="signup.html" style="color:var(--accent-mint);font-weight:600;">create an account</a>.');
+          fieldErr('email', 'No account associated with this email.');
+          return;
+        }
+
+        if (account.password !== pass) {
+          showAlert('<strong>Incorrect password.</strong> Please try again or <a href="forgot-password.html" style="color:var(--accent-mint);font-weight:600;">reset your password</a>.');
+          fieldErr('password', 'Incorrect password — check and try again.');
+          return;
+        }
+
+        /* Save session */
+        const session = { email, name: account.name };
+        if (get('remember').checked) {
+          localStorage.setItem('rl_session', JSON.stringify(session));
+        } else {
+          sessionStorage.setItem('rl_session', JSON.stringify(session));
+          localStorage.removeItem('rl_session');
+        }
+
+        /* Show success overlay then redirect */
+        get('successName').textContent = 'Welcome back, ' + account.name + '!';
+        get('successOverlay').classList.add('show');
+        setTimeout(() => { window.location.href = account.dest; }, 1600);
+
+      }, 500);
+    });
+  </script>
+
+</body>
+</html>
