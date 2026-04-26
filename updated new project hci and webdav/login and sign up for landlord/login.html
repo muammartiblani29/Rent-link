@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Landlord Login - RentLink</title>
+  <link rel="stylesheet" href="../Assets/CSS/main-style.css" />
+  <link rel="stylesheet" href="../Assets/CSS/navigation.css" />
+  <link rel="stylesheet" href="../Assets/CSS/sign and log.css">
+</head>
+<body>
+
+    <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">
+        <div class="logo-mark">RL</div>
+        <span class="logo-name">Rent<span>Link</span></span>
+      </a>
+        <nav class="main-nav">
+        <a href="#" class="nav-link">Home</a>
+        <a href="#" class="nav-link">About us</a>
+        <a href="#" class="nav-link">Contact us</a>
+      </nav>
+      <div class="nav-right">
+        <a href="login.html" class="nav-link active">Login</a>
+        <a href="signup.html"  class="nav-link ">Sign In</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-wrapper">
+    <div class="auth-container fade-up">
+      <div class="auth-card">
+        <div class="auth-header">
+          <h2>Landlord Portal</h2>
+          <p>Manage your units and track tenant payments.</p>
+        </div>
+
+        <form id="landlordLoginForm">
+          <div class="form-group">
+            <label>Landlord Email</label>
+            <input type="email" placeholder="name@email.com" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password"  placeholder="••••••••" id="lPass" class="form-control" required>
+          </div>
+          <button type="submit" class="btn-auth" style="background: var(--accent-orange);"><a href="../Landlord dashboard/landlord-dashboard.html">Landlord Login</a></button>
+        </form>
+
+        <div class="auth-footer">
+          <a href="forgot.html" class="auth-link">Forgot Password?</a>
+          <p style="margin-top:1.5rem;">New partner? <a href="signup.html" class="auth-link">Register Property</a></p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+   <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-brand-dot"></div>
+        <span class="footer-copy">© 2026 RentLink Portal · Block A · All rights reserved</span>
+      </div>
+      <div class="footer-links">
+        <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Support</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

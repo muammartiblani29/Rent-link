@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RentLink — Landlord Hub</title>
+  <link rel="stylesheet" href="../css/main-style.css" />
+  <link rel="stylesheet" href="../css/navigation.css" />
+  <link rel="stylesheet" href="../css/dashboard-cards.css" />
+  <style>
+    .hub-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; margin-top: 0.5rem; }
+    .hub-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.75rem; text-decoration: none; display: block;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s; box-shadow: var(--shadow-sm);
+    }
+    .hub-card:hover { transform: translateY(-4px); border-color: rgba(52,152,219,0.3); box-shadow: var(--shadow); }
+    .hub-card-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+    .hub-card h3 { font-size: 1rem; margin-bottom: 0.35rem; }
+    .hub-card p  { font-size: 0.8rem; color: var(--text-muted); line-height: 1.55; }
+    .hub-card-arrow { display: flex; align-items: center; gap: 0.3rem; margin-top: 1rem; font-size: 0.8rem; font-weight: 600; color: var(--accent-blue); }
+    @media (max-width: 700px) { .hub-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">
+        <div class="logo-mark">RL</div>
+        <span class="logo-name">Rent<span>Link</span></span>
+      </a>
+      <nav class="main-nav">
+        <a href="../tenant/index.html"   class="nav-link">Tenant</a>
+        <a href="../landlord/index.html" class="nav-link active">Landlord</a>
+        <a href="../admin/index.html"    class="nav-link">Admin</a>
+      </nav>
+      <div class="nav-right">
+        <span class="role-badge landlord">Landlord</span>
+        <div class="nav-avatar">RC</div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="sub-nav">
+    <div class="sub-nav-inner">
+      <a href="index.html"                  class="sub-nav-link active">Home</a>
+      <a href="landlord-dashboard.html"     class="sub-nav-link">Dashboard</a>
+      <a href="landlord-units.html"         class="sub-nav-link">Units</a>
+      <a href="landlord-tickets.html"       class="sub-nav-link">Tickets</a>
+      <a href="landlord-finances.html"      class="sub-nav-link">Finances</a>
+      <a href="landlord-reports.html"       class="sub-nav-link">Reports</a>
+    </div>
+  </nav>
+
+  <main class="page-wrapper">
+
+    <div class="breadcrumb">
+      <a href="../index.html">RentLink</a>
+      <span class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current">Landlord Hub</span>
+    </div>
+
+    <div class="page-header fade-up">
+      <div class="page-header-text">
+        <h1>Landlord Hub</h1>
+        <p>Welcome back, Ricardo. Block A has 8 units — 7 paid for April 2026.</p>
+      </div>
+    </div>
+
+    <div class="stat-grid fade-up-2">
+      <div class="stat-card green">
+        <span class="stat-icon">💰</span>
+        <div class="stat-label">Collected</div>
+        <div class="stat-value">₱87.5K</div>
+        <div class="stat-change up">7/8 units</div>
+      </div>
+      <div class="stat-card orange">
+        <span class="stat-icon">⏳</span>
+        <div class="stat-label">Pending</div>
+        <div class="stat-value">₱12.5K</div>
+        <div class="stat-change down">Unit 3-B</div>
+      </div>
+      <div class="stat-card red">
+        <span class="stat-icon">🔧</span>
+        <div class="stat-label">Open Tickets</div>
+        <div class="stat-value">4</div>
+        <div class="stat-change flat">1 emergency</div>
+      </div>
+      <div class="stat-card blue">
+        <span class="stat-icon">📊</span>
+        <div class="stat-label">Net Income</div>
+        <div class="stat-value">₱73.3K</div>
+        <div class="stat-change up">Apr 2026</div>
+      </div>
+    </div>
+
+    <div class="hub-grid fade-up-3">
+      <a href="landlord-dashboard.html" class="hub-card">
+        <span class="hub-card-icon">📊</span>
+        <h3>Dashboard Overview</h3>
+        <p>Summary stats, activity feed, and collection progress for April.</p>
+        <div class="hub-card-arrow">View Dashboard →</div>
+      </a>
+      <a href="landlord-units.html" class="hub-card">
+        <span class="hub-card-icon">🏢</span>
+        <h3>Manage Units</h3>
+        <p>All 8 units with tenant info, rent status, and payment records.</p>
+        <div class="hub-card-arrow">View Units →</div>
+      </a>
+      <a href="landlord-tickets.html" class="hub-card">
+        <span class="hub-card-icon">🔧</span>
+        <h3>Maintenance Tickets</h3>
+        <p>Review and update all active and resolved maintenance requests.</p>
+        <div class="hub-card-arrow">View Tickets →</div>
+      </a>
+      <a href="landlord-finances.html" class="hub-card">
+        <span class="hub-card-icon">💳</span>
+        <h3>Financial Overview</h3>
+        <p>Income vs expenses breakdown, collection rates, and cash flow.</p>
+        <div class="hub-card-arrow">View Finances →</div>
+      </a>
+      <a href="landlord-reports.html" class="hub-card">
+        <span class="hub-card-icon">📄</span>
+        <h3>Monthly Reports</h3>
+        <p>Generate and download monthly income and maintenance reports.</p>
+        <div class="hub-card-arrow">View Reports →</div>
+      </a>
+      <a href="../index.html" class="hub-card">
+        <span class="hub-card-icon">🏠</span>
+        <h3>Back to Portal</h3>
+        <p>Return to the main RentLink landing page to switch views.</p>
+        <div class="hub-card-arrow">Go Home →</div>
+      </a>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand"><div class="footer-brand-dot"></div><span class="footer-copy">© 2026 RentLink Portal — Landlord View</span></div>
+      <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Support</a></div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - RentLink</title>
+  <link rel="stylesheet" href="../Assets/CSS/main-style.css" />
+  <link rel="stylesheet" href="../Assets/CSS/navigation.css" />
+  <link rel="stylesheet" href="../Assets/CSS/sign and log.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">
+        <div class="logo-mark">RL</div>
+        <span class="logo-name">Rent<span>Link</span></span>
+      </a>
+        <nav class="main-nav">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="#" class="nav-link">About us</a>
+        <a href="#" class="nav-link">Contact us</a>
+      </nav>
+      <div class="nav-right">
+        <a href="signup.html" class="nav-link  active">Login</a>
+        <a href="login.html"  class="nav-link">Sign In</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-wrapper">
+    <div class="auth-container fade-up">
+      <div class="auth-card">
+        <div class="auth-header">
+          <h2>Welcome Back</h2>
+          <p>Enter your credentials to access your portal</p>
+        </div>
+
+        <form action="#">
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" class="form-control" placeholder="name@email.com" required>
+          </div>
+          
+          <div class="form-group">
+            <div style="display: flex; justify-content: space-between;">
+              <label>Password</label>
+              <a href="forgot-password.html" class="auth-link" style="font-size: 0.75rem;">Forgot password?</a>
+            </div>
+            <input type="password" class="form-control" placeholder="••••••••" required>
+          </div>
+
+          <button type="submit" class="btn-auth"> <a href="../Tenant dashboard/lobby.html">Sign In</button>
+        </form>
+
+        <div class="auth-footer">
+          <p><p>Don't have an account?</p> <a href="signup.html" class="auth-link">Create Account</a></p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-brand-dot"></div>
+        <span class="footer-copy">© 2026 RentLink Portal · Block A · All rights reserved</span>
+      </div>
+      <div class="footer-links">
+        <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Support</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

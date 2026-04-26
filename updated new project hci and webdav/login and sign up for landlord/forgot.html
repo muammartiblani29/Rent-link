@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reset Password - RentLink</title>
+  <link rel="stylesheet" href="../Assets/CSS/main-style.css" />
+  <link rel="stylesheet" href="../Assets/CSS/navigation.css" />
+  <link rel="stylesheet" href="../Assets/CSS/sign and log.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">
+        <div class="logo-mark">RL</div>
+        <span class="logo-name">Rent<span>Link</span></span>
+      </a>
+        <nav class="main-nav">
+        <a href="#" class="nav-link">Home</a>
+        <a href="#" class="nav-link">About us</a>
+        <a href="#" class="nav-link">Contact us</a>
+      </nav>
+      <div class="nav-right">
+        <a href="signup.html" class="nav-link active">Login</a>
+        <a href="login.html"  class="nav-link ">Sign In</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-wrapper">
+    <div class="auth-container fade-up">
+      <div class="auth-card">
+        
+        <div id="step1">
+          <div class="auth-header">
+            <h2>Forgot Password?</h2>
+            <p>Enter your email to receive a recovery code.</p>
+          </div>
+          <form id="formStep1">
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" id="userEmail" class="form-control" placeholder="name@email.com" required>
+            </div>
+            <button type="submit" class="btn-auth">Send Code</button>
+          </form>
+        </div>
+
+        <div id="step2" style="display: none;">
+          <div class="auth-header">
+            <div class="badge-blue" style="display:inline-block; padding: 5px 15px; border-radius: 20px; margin-bottom: 10px;">Verification</div>
+            <h2>Verify Identity</h2>
+            <p>We sent a code to <br><strong id="targetEmail" style="color:var(--text-white)"></strong></p>
+          </div>
+          <form id="formStep2">
+            <div class="form-group">
+              <label>6-Digit Code</label>
+              <input type="text" maxlength="6" class="form-control" style="text-align: center; letter-spacing: 8px; font-size: 1.5rem;" placeholder="000000" required>
+            </div>
+            <button type="submit" class="btn-auth">Verify Code</button>
+          </form>
+        </div>
+
+        <div id="step3" style="display: none;">
+          <div class="auth-header">
+            <h2>New Password</h2>
+            <p>Create a secure password for your account.</p>
+          </div>
+          <form id="formStep3">
+            <div class="form-group">
+              <label>New Password</label>
+              <input type="password" id="newPass" class="form-control" placeholder="••••••••" required>
+            </div>
+            <div class="form-group">
+              <label>Confirm New Password</label>
+              <input type="password" id="confirmPass" class="form-control" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn-auth">Update Password</button>
+          </form>
+        </div>
+
+        <div class="auth-footer">
+          <a href="login.html" class="auth-link">← Back to Login</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-brand-dot"></div>
+        <span class="footer-copy">© 2026 RentLink Portal · Block A · All rights reserved</span>
+      </div>
+      <div class="footer-links">
+        <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Support</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // FRONT-END NAVIGATION LOGIC
+    const s1 = document.getElementById('step1');
+    const s2 = document.getElementById('step2');
+    const s3 = document.getElementById('step3');
+
+    // Handle Step 1 -> Step 2
+    document.getElementById('formStep1').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('targetEmail').textContent = document.getElementById('userEmail').value;
+      s1.style.display = 'none';
+      s2.style.display = 'block';
+    });
+
+    // Handle Step 2 -> Step 3
+    document.getElementById('formStep2').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // In front-end only, we accept any 6-digit input
+      s2.style.display = 'none';
+      s3.style.display = 'block';
+    });
+
+    // Handle Step 3 -> Back to Login
+    document.getElementById('formStep3').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const p1 = document.getElementById('newPass').value;
+      const p2 = document.getElementById('confirmPass').value;
+
+      if (p1 !== p2) {
+        alert("Passwords do not match!");
+      } else {
+        alert("Password updated successfully! Redirecting to login...");
+        window.location.href = "login.html"; // Redirects back to login page
+      }
+    });
+  </script>
+
+</body>
+</html>
