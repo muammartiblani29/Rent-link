@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RentLink — Payments</title>
+  <link rel="stylesheet" href="../Assets/CSS/main-style.css" />
+  <link rel="stylesheet" href="../Assets/CSS/navigation.css" />
+  <link rel="stylesheet" href="../Assets/CSS/dashboard-cards.css" />
+  <link rel="stylesheet" href="../Assets/CSS/forms.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">
+        <div class="logo-mark">RL</div>
+        <span class="logo-name">Rent<span>Link</span></span>
+      </a>
+      <nav class="main-nav">
+       <a href="lobby.html"          class="nav-link">Browse Rooms</a>
+        <a href="../Tenant dashboard/tenant-dashboard.html"   class="nav-link active">My Dashboard</a>
+    
+      </nav>
+      <div class="nav-right">
+        <span class="role-badge tenant">Tenant</span>
+        <div class="nav-avatar">MS</div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="sub-nav">
+    <div class="sub-nav-inner">
+      <a href="index.html"              class="sub-nav-link">Home</a>
+      <a href="tenant-dashboard.html"   class="sub-nav-link">Dashboard</a>
+      <a href="tenant-tickets.html"     class="sub-nav-link">My Tickets</a>
+      <a href="tenant-payments.html"    class="sub-nav-link active">Payments</a>
+      <a href="tenant-lease.html"       class="sub-nav-link">Lease Info</a>
+      <a href="tenant-notices.html"     class="sub-nav-link">Notices</a>
+    </div>
+  </nav>
+
+  <main class="page-wrapper">
+
+    <div class="breadcrumb">
+      <a href="../Tenant dashboard/lobby.html">RentLink</a>
+      <span class="breadcrumb-sep">›</span>
+      <a href="index.html">Tenant</a>
+      <span class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current">Payments</span>
+    </div>
+
+    <div class="page-header fade-up">
+      <div class="page-header-text">
+        <h1>Rent Payments</h1>
+        <p>Upload receipts and view your full payment history.</p>
+      </div>
+    </div>
+
+    <div class="grid-2 fade-up-2">
+
+      <!-- Upload Form -->
+      <div class="form-card">
+        <div class="form-card-header">
+          <span class="section-label">Upload Receipt</span>
+          <h2>Submit Payment Proof</h2>
+          <p>Upload your proof of payment so your landlord can verify it.</p>
+        </div>
+
+        <div class="notice notice-success">
+          <span class="notice-icon">✅</span>
+          <p><strong>April 2026 is confirmed.</strong> Your next payment of ₱13,000 is due on May 1, 2026.</p>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="pay-month">Payment For <span class="req">*</span></label>
+            <div class="select-wrap">
+              <select class="form-select" id="pay-month">
+                <option value="" disabled selected>Select month…</option>
+                <option>May 2026</option>
+                <option>June 2026</option>
+                <option>July 2026</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="pay-amount">Amount Paid <span class="req">*</span></label>
+            <div class="input-icon-wrap">
+              <span class="input-icon">₱</span>
+              <input type="number" class="form-input" id="pay-amount" placeholder="13,000" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="pay-method">Payment Method <span class="req">*</span></label>
+          <div class="check-group">
+            <label class="check-pill selected"><input type="radio" name="method" checked />GCash</label>
+            <label class="check-pill"><input type="radio" name="method" />Bank Transfer</label>
+            <label class="check-pill"><input type="radio" name="method" />Maya</label>
+            <label class="check-pill"><input type="radio" name="method" />Cash</label>
+            <label class="check-pill"><input type="radio" name="method" />Check</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="ref">Reference / Transaction No.</label>
+          <input type="text" class="form-input" id="ref" placeholder="e.g. GC-20260501-001234" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="pay-date">Date Paid <span class="req">*</span></label>
+          <input type="date" class="form-input" id="pay-date" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Receipt File <span class="req">*</span></label>
+          <label class="upload-zone" for="receipt-file">
+            <span class="upload-emoji">🧾</span>
+            <span class="upload-title">Upload your receipt</span>
+            <span class="upload-sub">or <span class="upload-link">browse</span> — PDF, JPG, PNG up to 10 MB</span>
+            <input type="file" id="receipt-file" accept=".pdf,image/*" />
+          </label>
+          <p class="field-hint">Screenshot of GCash confirmation or bank transfer slip accepted.</p>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-secondary">Clear</button>
+          <button class="btn btn-primary">Submit Receipt →</button>
+        </div>
+      </div>
+
+      <!-- Payment History -->
+      <div class="card">
+        <span class="section-label">History</span>
+        <h2 style="margin-bottom:1.25rem;">Payment History</h2>
+
+        <div class="ticket-list">
+          <div class="ticket-row">
+            <span class="ticket-id">APR-26</span>
+            <div>
+              <div class="ticket-info-title">April 2026 — ₱13,000</div>
+              <div class="ticket-info-sub">GCash · Confirmed Apr 3</div>
+            </div>
+            <span class="badge badge-green">Confirmed</span>
+          </div>
+          <div class="ticket-row">
+            <span class="ticket-id">MAR-26</span>
+            <div>
+              <div class="ticket-info-title">March 2026 — ₱13,000</div>
+              <div class="ticket-info-sub">Bank Transfer · Confirmed Mar 4</div>
+            </div>
+            <span class="badge badge-green">Confirmed</span>
+          </div>
+          <div class="ticket-row">
+            <span class="ticket-id">FEB-26</span>
+            <div>
+              <div class="ticket-info-title">February 2026 — ₱13,000</div>
+              <div class="ticket-info-sub">GCash · Confirmed Feb 2</div>
+            </div>
+            <span class="badge badge-green">Confirmed</span>
+          </div>
+          <div class="ticket-row">
+            <span class="ticket-id">JAN-26</span>
+            <div>
+              <div class="ticket-info-title">January 2026 — ₱13,000</div>
+              <div class="ticket-info-sub">GCash · Confirmed Jan 3</div>
+            </div>
+            <span class="badge badge-green">Confirmed</span>
+          </div>
+          <div class="ticket-row">
+            <span class="ticket-id">DEC-25</span>
+            <div>
+              <div class="ticket-info-title">December 2025 — ₱13,000</div>
+              <div class="ticket-info-sub">Bank Transfer · Confirmed Dec 2</div>
+            </div>
+            <span class="badge badge-green">Confirmed</span>
+          </div>
+          <div class="ticket-row">
+            <span class="ticket-id">NOV-25</span>
+            <div>
+              <div class="ticket-info-title">November 2025 — ₱13,000</div>
+              <div class="ticket-info-sub">GCash · Confirmed Nov 4</div>
+            </div>
+            <span class="badge badge-green">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="progress-block" style="margin-top:1.5rem;">
+          <div class="progress-meta"><span>On-time payments (16/16)</span><span>100%</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-brand-dot"></div>
+        <span class="footer-copy">© 2026 RentLink Portal — Tenant View</span>
+      </div>
+      <div class="footer-links">
+        <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Support</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
