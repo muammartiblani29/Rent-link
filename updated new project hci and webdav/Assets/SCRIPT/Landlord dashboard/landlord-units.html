@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RentLink — Units</title>
+  <link rel="stylesheet" href="../Assets/CSS/main-style.css" />
+  <link rel="stylesheet" href="../Assets/CSS/navigation.css" />
+  <link rel="stylesheet" href="../Assets/CSS/dashboard-cards.css" />
+  <link rel="stylesheet" href="../Assets/CSS/forms.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><div class="logo-mark">RL</div><span class="logo-name">Rent<span>Link</span></span></a>
+      <nav class="main-nav">
+         <a href="#" class="nav-link active">Home</a>
+        <a href="#" class="nav-link">About us</a>
+        <a href="#" class="nav-link">Contacts</a>
+      </nav>
+      <div class="nav-right"><span class="role-badge landlord">Landlord</span><div class="nav-avatar">RC</div></div>
+    </div>
+  </header>
+
+  <nav class="sub-nav">
+    <div class="sub-nav-inner">
+      <a href="landlord-dashboard.html"  class="sub-nav-link">Dashboard</a>
+      <a href="landlord-units.html"      class="sub-nav-link active">Units</a>
+      <a href="landlord-tickets.html"    class="sub-nav-link">Tickets</a>
+      <a href="landlord-finances.html"   class="sub-nav-link">Finances</a>
+      <a href="landlord-reports.html"    class="sub-nav-link">Reports</a>
+    </div>
+  </nav>
+
+  <main class="page-wrapper">
+
+    <div class="breadcrumb">
+      <a href="../index.html">RentLink</a><span class="breadcrumb-sep">›</span>
+      <a href="index.html">Landlord</a><span class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current">Units</span>
+    </div>
+
+    <div class="page-header fade-up">
+      <div class="page-header-text"><h1>All Units</h1><p>Block A — 8 units · 7 occupied · 1 pending payment</p></div>
+      <div style="display:flex;gap:0.6rem;">
+        <span class="badge badge-green">7 Paid</span>
+        <span class="badge badge-orange">1 Pending</span>
+      </div>
+    </div>
+
+    <!-- Summary Stats -->
+    <div class="stat-grid fade-up-2">
+      <div class="stat-card green">
+        <span class="stat-icon">✅</span>
+        <div class="stat-label">Fully Paid</div>
+        <div class="stat-value">7</div>
+        <div class="stat-change up">of 8 units</div>
+      </div>
+      <div class="stat-card orange">
+        <span class="stat-icon">⏳</span>
+        <div class="stat-label">Pending</div>
+        <div class="stat-value">1</div>
+        <div class="stat-change flat">Unit 3-B</div>
+      </div>
+      <div class="stat-card blue">
+        <span class="stat-icon">🏢</span>
+        <div class="stat-label">Occupied</div>
+        <div class="stat-value">8/8</div>
+        <div class="stat-change up">100% occupancy</div>
+      </div>
+      <div class="stat-card teal">
+        <span class="stat-icon">💰</span>
+        <div class="stat-label">Monthly Revenue</div>
+        <div class="stat-value">₱100K</div>
+        <div class="stat-change up">At full collection</div>
+      </div>
+    </div>
+
+    <!-- Units Grid -->
+    <div class="card fade-up-3">
+      <span class="section-label">Block A</span>
+      <h2 style="margin-bottom:1.5rem;">Unit Details</h2>
+      <div class="units-grid">
+
+        <div class="unit-card">
+          <div class="unit-card-top">
+            <div class="unit-num">1-A</div>
+            <span class="unit-floor-tag">Floor 1</span>
+          </div>
+          <div class="unit-tenant-name">Ramon Cruz</div>
+          <div class="unit-rent-amt">₱12,500 / mo</div>
+          <div class="unit-status">
+            <span class="status-dot paid"></span>April — Paid Apr 1
+          </div>
+        </div>
+
+        <div class="unit-card">
+          <div class="unit-card-top">
+            <div class="unit-num">1-B</div>
+            <span class="unit-floor-tag">Floor 1</span>
+          </div>
+          <div class="unit-tenant-name">Luz Villanueva</div>
+          <div class="unit-rent-amt">₱11,000 / mo</div>
+          <div class="unit-status">
+            <span class="status-dot paid"></span>April — Paid Apr 2
+          </div>
+        </div>
+
+        <div class="unit-card">
+          <div class="unit-card-top">
+            <div class="unit-num">1-C</div>
+            <span class="unit-floor-tag">Floor 1</span>
+          </div>
+          <div class="unit-tenant-name">Joel Reyes</div>
+          <div class="unit-rent-amt">₱10,500 / mo</div>
+          <div class="unit-status">
+            <span class="status-dot paid"></span>April — Paid Apr 1
+          </div>
+        </div>
+
+        <div class="unit-card">
+          <div class="unit-card-top">
+            <div class="unit-num">2-A</div>
+            <span class="unit-floor-tag">Floor 2</span>
+          </div>
+          <div class="unit-tenant-name">Maria Santos</div>
+          <div class="unit-rent-amt">₱13,000 / mo</div>
+          <div class="unit-status">
+            <span class="status-dot paid"></span>April — Paid Apr 3
+          </div>
+        </div>
+
+        <div class="unit-card">
+          <div class="unit-card-top">
+            <div class="unit-num">2-B</div>
+            <span class="unit-floor-tag">Floor 2</span>
+          </div>
+          <div class="unit-tenant-name">Danilo Abante</div>
+          <div class="unit-rent-amt">₱13,000 / mo</div>
+          <div class="unit-status">
+            <span class="status-dot paid"></span>April — Paid Apr 2
+          </div>
+        </div>
+
+        <div class="unit-card">
+          <div class="unit-card-top">
+            <div class="unit-num">3-A</div>
+            <span class="unit-floor-tag">Floor 3</span>
+          </div>
+          <div class="unit-tenant-name">Carla Mendoza</div>
+          <div class="unit-rent-amt">₱14,000 / mo</div>
+          <div class="unit-status">
+            <span class="status-dot paid"></span>April — Paid Apr 2
+          </div>
+        </div>
+
+        <div class="unit-card" style="border-color: rgba(230,126,34,0.3);">
+          <div class="unit-card-top">
+            <div class="unit-num">3-B</div>
+            <span class="unit-floor-tag">Floor 3</span>
+          </div>
+          <div class="unit-tenant-name">Efren Tolentino</div>
+          <div class="unit-rent-amt">₱12,500 / mo</div>
+          <div class="unit-status">
+            <span class="status-dot pending"></span>April — Pending ⚠️
+          </div>
+        </div>
+
+        <div class="unit-card">
+          <div class="unit-card-top">
+            <div class="unit-num">3-D</div>
+            <span class="unit-floor-tag">Floor 3</span>
+          </div>
+          <div class="unit-tenant-name">Ana Delos Reyes</div>
+          <div class="unit-rent-amt">₱13,500 / mo</div>
+          <div class="unit-status">
+            <span class="status-dot paid"></span>April — Paid Apr 1
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Floor Summary -->
+    <div class="grid-3 fade-up-4" style="margin-top:1.5rem;">
+      <div class="card">
+        <span class="section-label">Floor 1</span>
+        <h3 style="margin-bottom:0.75rem;">Units 1-A, 1-B, 1-C</h3>
+        <div class="progress-block">
+          <div class="progress-meta"><span>Collection</span><span>₱34,000 / ₱34,000</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <span class="section-label">Floor 2</span>
+        <h3 style="margin-bottom:0.75rem;">Units 2-A, 2-B</h3>
+        <div class="progress-block">
+          <div class="progress-meta"><span>Collection</span><span>₱26,000 / ₱26,000</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <span class="section-label">Floor 3</span>
+        <h3 style="margin-bottom:0.75rem;">Units 3-A, 3-B, 3-D</h3>
+        <div class="progress-block">
+          <div class="progress-meta"><span>Collection</span><span>₱27,500 / ₱40,000</span></div>
+          <div class="progress-track"><div class="progress-fill orange" style="width:68%"></div></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand"><div class="footer-brand-dot"></div><span class="footer-copy">© 2026 RentLink Portal — Landlord View</span></div>
+      <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Support</a></div>
+    </div>
+  </footer>
+</body>
+</html>

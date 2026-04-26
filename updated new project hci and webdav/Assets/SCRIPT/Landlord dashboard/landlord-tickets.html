@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RentLink — Tickets (Landlord)</title>
+  <link rel="stylesheet" href="../Assets/CSS/main-style.css" />
+  <link rel="stylesheet" href="../Assets/CSS/navigation.css" />
+  <link rel="stylesheet" href="../Assets/CSS/dashboard-cards.css" />
+    <link rel="stylesheet" href="../Assets/CSS/forms.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><div class="logo-mark">RL</div><span class="logo-name">Rent<span>Link</span></span></a>
+      <nav class="main-nav">
+        <a href="#" class="nav-link active">Home</a>
+        <a href="#" class="nav-link">About us</a>
+        <a href="#" class="nav-link">Contacts</a>
+      </nav>
+      <div class="nav-right"><span class="role-badge landlord">Landlord</span><div class="nav-avatar">RC</div></div>
+    </div>
+  </header>
+
+  <nav class="sub-nav">
+    <div class="sub-nav-inner">
+      <a href="landlord-dashboard.html"  class="sub-nav-link">Dashboard</a>
+      <a href="landlord-units.html"      class="sub-nav-link">Units</a>
+      <a href="landlord-tickets.html"    class="sub-nav-link active">Tickets</a>
+      <a href="landlord-finances.html"   class="sub-nav-link">Finances</a>
+      <a href="landlord-reports.html"    class="sub-nav-link">Reports</a>
+    </div>
+  </nav>
+
+  <main class="page-wrapper">
+
+    <div class="breadcrumb">
+      <a href="../index.html">RentLink</a><span class="breadcrumb-sep">›</span>
+      <a href="index.html">Landlord</a><span class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current">Tickets</span>
+    </div>
+
+    <div class="page-header fade-up">
+      <div class="page-header-text"><h1>Maintenance Tickets</h1><p>All active and resolved maintenance requests across Block A.</p></div>
+      <div style="display:flex;gap:0.6rem;">
+        <span class="badge badge-red">4 Open</span>
+        <span class="badge badge-green">12 Resolved</span>
+      </div>
+    </div>
+
+    <div class="stat-grid fade-up-2">
+      <div class="stat-card red">
+        <span class="stat-icon">🔴</span>
+        <div class="stat-label">Open</div>
+        <div class="stat-value">2</div>
+        <div class="stat-change down">Awaiting action</div>
+      </div>
+      <div class="stat-card orange">
+        <span class="stat-icon">🟠</span>
+        <div class="stat-label">In Progress</div>
+        <div class="stat-value">1</div>
+        <div class="stat-change flat">Worker assigned</div>
+      </div>
+      <div class="stat-card blue">
+        <span class="stat-icon">🔵</span>
+        <div class="stat-label">Pending Parts</div>
+        <div class="stat-value">1</div>
+        <div class="stat-change flat">Awaiting delivery</div>
+      </div>
+      <div class="stat-card green">
+        <span class="stat-icon">🟢</span>
+        <div class="stat-label">Resolved (MTD)</div>
+        <div class="stat-value">3</div>
+        <div class="stat-change up">This month</div>
+      </div>
+    </div>
+
+    <!-- Active Tickets -->
+    <div class="card fade-up-3" style="margin-bottom:1.5rem;">
+      <span class="section-label">Active</span>
+      <h2 style="margin-bottom:1.25rem;">Open & In-Progress Tickets</h2>
+      <div class="ticket-list">
+
+        <div class="ticket-row">
+          <span class="ticket-id">#TKT-0041</span>
+          <div>
+            <div class="ticket-info-title">Unit 2-A — Leaking kitchen faucet</div>
+            <div class="ticket-info-sub">Maria Santos · Plumbing · Apr 10, 2026 · High</div>
+          </div>
+          <div class="ticket-actions">
+            <span class="badge badge-orange">In Progress</span>
+            <button class="btn btn-sm btn-secondary">Update</button>
+          </div>
+        </div>
+
+        <div class="ticket-row">
+          <span class="ticket-id">#TKT-0040</span>
+          <div>
+            <div class="ticket-info-title">Unit 1-C — Electrical outlet not working</div>
+            <div class="ticket-info-sub">Joel Reyes · Electrical · Apr 9, 2026 · High</div>
+          </div>
+          <div class="ticket-actions">
+            <span class="badge badge-red">Open</span>
+            <button class="btn btn-sm btn-secondary">Assign</button>
+          </div>
+        </div>
+
+        <div class="ticket-row">
+          <span class="ticket-id">#TKT-0039</span>
+          <div>
+            <div class="ticket-info-title">Unit 2-A — AC unit not cooling</div>
+            <div class="ticket-info-sub">Maria Santos · Air Con · Apr 3, 2026 · Medium</div>
+          </div>
+          <div class="ticket-actions">
+            <span class="badge badge-red">Open</span>
+            <button class="btn btn-sm btn-secondary">Assign</button>
+          </div>
+        </div>
+
+        <div class="ticket-row">
+          <span class="ticket-id">#TKT-0035</span>
+          <div>
+            <div class="ticket-info-title">Unit 3-D — Broken window screen</div>
+            <div class="ticket-info-sub">Ana Delos Reyes · Structural · Mar 29, 2026 · Low</div>
+          </div>
+          <div class="ticket-actions">
+            <span class="badge badge-blue">Pending Parts</span>
+            <button class="btn btn-sm btn-secondary">Update</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Resolved Tickets -->
+    <div class="card fade-up-4">
+      <span class="section-label">Resolved</span>
+      <h2 style="margin-bottom:1.25rem;">Closed Tickets</h2>
+      <div class="ticket-list">
+
+        <div class="ticket-row">
+          <span class="ticket-id">#TKT-0031</span>
+          <div>
+            <div class="ticket-info-title">Unit 1-B — Bathroom door latch</div>
+            <div class="ticket-info-sub">Ramon Cruz · Doors · Resolved Mar 25, 2026</div>
+          </div>
+          <span class="badge badge-green">Resolved</span>
+        </div>
+
+        <div class="ticket-row">
+          <span class="ticket-id">#TKT-0028</span>
+          <div>
+            <div class="ticket-info-title">Unit 2-B — Water heater not working</div>
+            <div class="ticket-info-sub">Danilo Abante · Plumbing · Resolved Mar 15, 2026</div>
+          </div>
+          <span class="badge badge-green">Resolved</span>
+        </div>
+
+        <div class="ticket-row">
+          <span class="ticket-id">#TKT-0024</span>
+          <div>
+            <div class="ticket-info-title">Unit 2-A — Bedroom light flickering</div>
+            <div class="ticket-info-sub">Maria Santos · Electrical · Resolved Feb 20, 2026</div>
+          </div>
+          <span class="badge badge-green">Resolved</span>
+        </div>
+
+        <div class="ticket-row">
+          <span class="ticket-id">#TKT-0019</span>
+          <div>
+            <div class="ticket-info-title">Unit 2-A — Cockroach infestation</div>
+            <div class="ticket-info-sub">Maria Santos · Pest Control · Resolved Jan 15, 2026</div>
+          </div>
+          <span class="badge badge-green">Resolved</span>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand"><div class="footer-brand-dot"></div><span class="footer-copy">© 2026 RentLink Portal — Landlord View</span></div>
+      <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Support</a></div>
+    </div>
+  </footer>
+</body>
+</html>

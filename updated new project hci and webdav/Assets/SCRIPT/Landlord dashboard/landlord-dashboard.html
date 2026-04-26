@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RentLink — Landlord Dashboard</title>
+  <link rel="stylesheet" href="../Assets/CSS/main-style.css" />
+  <link rel="stylesheet" href="../Assets/CSS/navigation.css" />
+  <link rel="stylesheet" href="../Assets/CSS/dashboard-cards.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><div class="logo-mark">RL</div><span class="logo-name">Rent<span>Link</span></span></a>
+      <nav class="main-nav">
+         <a href="#" class="nav-link active">Home</a>
+        <a href="#" class="nav-link">About us</a>
+        <a href="#" class="nav-link">Contacts</a>
+      </nav>
+      <div class="nav-right"><span class="role-badge landlord">Landlord</span><div class="nav-avatar">RC</div></div>
+    </div>
+  </header>
+
+  <nav class="sub-nav">
+    <div class="sub-nav-inner">
+      <a href="landlord-dashboard.html"  class="sub-nav-link active">Dashboard</a>
+      <a href="landlord-units.html"      class="sub-nav-link">Units</a>
+      <a href="landlord-tickets.html"    class="sub-nav-link">Tickets</a>
+      <a href="landlord-finances.html"   class="sub-nav-link">Finances</a>
+      <a href="landlord-reports.html"    class="sub-nav-link">Reports</a>
+    </div>
+  </nav>
+
+  <main class="page-wrapper">
+
+    <div class="breadcrumb">
+      <a href="../index.html">RentLink</a><span class="breadcrumb-sep">›</span>
+      <a href="index.html">Landlord</a><span class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current">Dashboard</span>
+    </div>
+
+    <div class="page-header fade-up">
+      <div class="page-header-text"><h1>Landlord Dashboard</h1><p>Block A · April 2026 overview</p></div>
+      <a href="landlord-finances.html" class="btn btn-primary btn-sm">Full Financial Report</a>
+    </div>
+
+    <div class="stat-grid fade-up-2">
+      <div class="stat-card green">
+        <span class="stat-icon">💰</span>
+        <div class="stat-label">Total Collected</div>
+        <div class="stat-value">₱87,500</div>
+        <div class="stat-change up">7 of 8 units</div>
+      </div>
+      <div class="stat-card orange">
+        <span class="stat-icon">⏳</span>
+        <div class="stat-label">Outstanding</div>
+        <div class="stat-value">₱12,500</div>
+        <div class="stat-change down">Unit 3-B overdue</div>
+      </div>
+      <div class="stat-card red">
+        <span class="stat-icon">🔧</span>
+        <div class="stat-label">Open Tickets</div>
+        <div class="stat-value">4</div>
+        <div class="stat-change flat">2 urgent</div>
+      </div>
+      <div class="stat-card blue">
+        <span class="stat-icon">📈</span>
+        <div class="stat-label">Net Income</div>
+        <div class="stat-value">₱73,300</div>
+        <div class="stat-change up">After expenses</div>
+      </div>
+    </div>
+
+    <div class="grid-2 fade-up-3">
+
+      <!-- Collection Bar Chart (CSS only) -->
+      <div class="card">
+        <span class="section-label">Trend</span>
+        <h2 style="margin-bottom:0.5rem;">Monthly Collection</h2>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.5rem;">Last 7 months (₱k)</p>
+        <div class="bar-chart">
+          <div class="bar-col"><div class="bar-fill" style="height:75%"></div><span class="bar-label">Oct</span></div>
+          <div class="bar-col"><div class="bar-fill" style="height:82%"></div><span class="bar-label">Nov</span></div>
+          <div class="bar-col"><div class="bar-fill" style="height:100%"></div><span class="bar-label">Dec</span></div>
+          <div class="bar-col"><div class="bar-fill" style="height:88%"></div><span class="bar-label">Jan</span></div>
+          <div class="bar-col"><div class="bar-fill" style="height:100%"></div><span class="bar-label">Feb</span></div>
+          <div class="bar-col"><div class="bar-fill" style="height:100%"></div><span class="bar-label">Mar</span></div>
+          <div class="bar-col"><div class="bar-fill dim" style="height:87%"></div><span class="bar-label">Apr</span></div>
+        </div>
+        <div class="progress-block">
+          <div class="progress-meta"><span>April Collection Rate</span><span>87.5%</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width:87.5%"></div></div>
+        </div>
+      </div>
+
+      <!-- Activity Feed -->
+      <div class="card">
+        <span class="section-label">Activity</span>
+        <h2 style="margin-bottom:1.25rem;">Recent Activity</h2>
+        <div class="activity-feed">
+          <div class="activity-item">
+            <div class="activity-dot-wrap"><div class="activity-dot green"></div></div>
+            <div><div class="activity-title">Unit 1-A — Ramon Cruz paid April rent</div><div class="activity-time">Apr 1 · ₱12,500</div></div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot-wrap"><div class="activity-dot orange"></div></div>
+            <div><div class="activity-title">Ticket #TKT-0041 opened — Unit 2-A faucet</div><div class="activity-time">Apr 10 · High priority</div></div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot-wrap"><div class="activity-dot green"></div></div>
+            <div><div class="activity-title">Unit 3-A — Carla Mendoza paid April rent</div><div class="activity-time">Apr 2 · ₱14,000</div></div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot-wrap"><div class="activity-dot red"></div></div>
+            <div><div class="activity-title">Unit 3-B — Efren Tolentino overdue</div><div class="activity-time">Apr 6 · ₱12,500 not yet uploaded</div></div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot-wrap"><div class="activity-dot blue"></div></div>
+            <div><div class="activity-title">Broadcast sent — May rent reminder</div><div class="activity-time">Apr 5 · All tenants</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Open Tickets Summary -->
+    <div class="card fade-up-4" style="margin-top:1.5rem;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
+        <div><span class="section-label">Maintenance</span><h2>Active Tickets</h2></div>
+        <a href="landlord-tickets.html" class="btn btn-ghost btn-sm">View All →</a>
+      </div>
+      <div class="ticket-list">
+        <div class="ticket-row">
+          <span class="ticket-id">#TKT-0041</span>
+          <div><div class="ticket-info-title">Unit 2-A — Leaking kitchen faucet</div><div class="ticket-info-sub">Maria Santos · Apr 10 · Plumbing</div></div>
+          <span class="badge badge-orange">In Progress</span>
+        </div>
+        <div class="ticket-row">
+          <span class="ticket-id">#TKT-0040</span>
+          <div><div class="ticket-info-title">Unit 1-C — Electrical outlet dead</div><div class="ticket-info-sub">Joel Reyes · Apr 9 · Electrical</div></div>
+          <span class="badge badge-red">Open</span>
+        </div>
+        <div class="ticket-row">
+          <span class="ticket-id">#TKT-0038</span>
+          <div><div class="ticket-info-title">Unit 2-A — AC not cooling</div><div class="ticket-info-sub">Maria Santos · Apr 3 · Air Con</div></div>
+          <span class="badge badge-red">Open</span>
+        </div>
+        <div class="ticket-row">
+          <span class="ticket-id">#TKT-0035</span>
+          <div><div class="ticket-info-title">Unit 3-D — Broken window screen</div><div class="ticket-info-sub">Ana Delos Reyes · Mar 29 · Structural</div></div>
+          <span class="badge badge-blue">Pending Parts</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand"><div class="footer-brand-dot"></div><span class="footer-copy">© 2026 RentLink Portal — Landlord View</span></div>
+      <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Support</a></div>
+    </div>
+  </footer>
+</body>
+</html>
