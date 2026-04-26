@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RentLink — Landlord Room Manager</title>
+  <link rel="stylesheet" href="../Assets/CSS/main-style.css" />
+  <link rel="stylesheet" href="../Assets/CSS/navigation.css" />
+  <link rel="stylesheet" href="../Assets/CSS/land-lordlobby.css"/>
+  
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+   <header class="site-header">
+    <div class="header-inner">
+      <a href="landlord-lobby.html" class="logo">
+        <div class="logo-mark">RL</div>
+        <span class="logo-name">Rent<span>Link</span></span>
+      </a>
+      <nav class="main-nav">
+        <a href="landlord-lobby.html"          class="nav-link active">My Rooms</a>
+        <a href="landlord-dashboard.html"   class="nav-link ">My Dashboard</a>
+      </nav>
+      <div class="nav-right">
+        <span class="role-badge landlord">Landlord</span>
+        <div class="nav-avatar">RS</div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ===== HERO ===== -->
+  <div class="ll-hero">
+    <div class="ll-hero-inner">
+      <div class="ll-hero-top">
+        <div class="ll-welcome">
+          <h1>Room Manager — <span id="llName">Block A</span></h1>
+          <p>Manage your listed rooms, set availability, and track tenant occupancy.</p>
+        </div>
+        <div class="hero-actions">
+          <button class="btn-add-room" onclick="openAddModal()">
+            ＋ Add New Room
+          </button>
+          <a href="landlord-dashboard.html" class="btn-dashboard">
+            📊 Go to Dashboard →
+          </a>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="ll-stats" id="heroStats">
+        <!-- injected by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== BODY ===== -->
+  <main class="ll-body">
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <h2>Your Listings</h2>
+        <div class="search-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="Search unit or type…" oninput="renderRooms()" />
+        </div>
+        <select class="filter-sel" id="statusFilter" onchange="renderRooms()">
+          <option value="">All Status</option>
+          <option value="occupied">Occupied</option>
+          <option value="available">Available</option>
+          <option value="maintenance">Maintenance</option>
+        </select>
+        <select class="filter-sel" id="floorFilter" onchange="renderRooms()">
+          <option value="">All Floors</option>
+          <option value="1">Floor 1</option>
+          <option value="2">Floor 2</option>
+          <option value="3">Floor 3</option>
+        </select>
+      </div>
+      <div class="toolbar-right">
+        <div class="view-toggle">
+          <button class="view-btn active" id="gridViewBtn" onclick="setView('grid')" title="Grid view">⊞</button>
+          <button class="view-btn" id="listViewBtn" onclick="setView('list')" title="List view">☰</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="rooms-grid" id="roomsGrid"></div>
+    <div class="empty-state" id="emptyState" style="display:none;">
+      <div class="ei">🏢</div>
+      <h3>No rooms yet</h3>
+      <p>Click "Add New Room" to list your first unit.</p>
+      <button class="btn-add-room" onclick="openAddModal()">＋ Add New Room</button>
+    </div>
+
+  </main>
+
+  <!-- ===== ADD / EDIT MODAL ===== -->
+  <div class="modal-bg" id="modalBg">
+    <div class="modal" id="roomModal">
+
+      <div class="modal-header">
+        <div>
+          <h2 id="modalTitle">Add New Room</h2>
+          <p id="modalSubtitle">Fill in the details for your new listing.</p>
+        </div>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+
+      <div class="modal-body">
+
+        <!-- Photo emoji picker -->
+        <div class="mf">
+          <label class="ml">Room Icon</label>
+          <div class="emoji-row" id="emojiRow">
+            <!-- injected by JS -->
+          </div>
+          <input type="hidden" id="fEmoji" value="🏠" />
+        </div>
+
+        <div class="mf-row">
+          <div>
+            <label class="ml" for="fUnit">Unit Number <span class="req">*</span></label>
+            <input type="text" class="mi" id="fUnit" placeholder="e.g. Unit 4-A" />
+            <div class="mf-err" id="fUnitErr">Unit number is required.</div>
+          </div>
+          <div>
+            <label class="ml" for="fFloor">Floor <span class="req">*</span></label>
+            <select class="ms" id="fFloor">
+              <option value="">Select floor…</option>
+              <option value="1">Floor 1</option>
+              <option value="2">Floor 2</option>
+              <option value="3">Floor 3</option>
+              <option value="4">Floor 4</option>
+              <option value="5">Floor 5</option>
+            </select>
+            <div class="mf-err" id="fFloorErr">Floor is required.</div>
+          </div>
+        </div>
+
+        <div class="mf-row">
+          <div>
+            <label class="ml" for="fType">Room Type <span class="req">*</span></label>
+            <select class="ms" id="fType">
+              <option value="">Select type…</option>
+              <option value="Studio">Studio</option>
+              <option value="1BR">1-Bedroom</option>
+              <option value="2BR">2-Bedroom</option>
+              <option value="3BR">3-Bedroom</option>
+            </select>
+            <div class="mf-err" id="fTypeErr">Room type is required.</div>
+          </div>
+          <div>
+            <label class="ml" for="fPrice">Monthly Rent (₱) <span class="req">*</span></label>
+            <input type="number" class="mi" id="fPrice" placeholder="e.g. 12000" min="1000" />
+            <div class="mf-err" id="fPriceErr">Valid rent amount is required.</div>
+          </div>
+        </div>
+
+        <div class="mf-row">
+          <div>
+            <label class="ml" for="fSqm">Size (sqm)</label>
+            <input type="number" class="mi" id="fSqm" placeholder="e.g. 28" min="5" />
+          </div>
+          <div>
+            <label class="ml" for="fBath">Bathrooms</label>
+            <select class="ms" id="fBath">
+              <option value="1">1 bathroom</option>
+              <option value="2">2 bathrooms</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mf-row">
+          <div>
+            <label class="ml" for="fStatus">Status</label>
+            <select class="ms" id="fStatus">
+              <option value="available">Available</option>
+              <option value="occupied">Occupied</option>
+              <option value="maintenance">Under Maintenance</option>
+            </select>
+          </div>
+          <div>
+            <label class="ml" for="fTenant">Current Tenant (if occupied)</label>
+            <input type="text" class="mi" id="fTenant" placeholder="Full name" />
+          </div>
+        </div>
+
+        <div class="mf">
+          <label class="ml">Amenities</label>
+          <div class="amenity-checks" id="amenityChecks">
+            <!-- injected by JS -->
+          </div>
+        </div>
+
+        <div class="mf">
+          <label class="ml" for="fDesc">Description</label>
+          <textarea class="mta" id="fDesc" placeholder="Describe the unit — highlights, features, nearby landmarks…"></textarea>
+        </div>
+
+      </div><!-- /modal-body -->
+
+      <div class="modal-footer">
+        <button class="mbtn cancel" onclick="closeModal()">Cancel</button>
+        <button class="mbtn save" id="saveBtn" onclick="saveRoom()">
+          <span id="saveBtnLabel">Save Room →</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== DELETE CONFIRM ===== -->
+  <div class="del-bg" id="delBg">
+    <div class="del-modal">
+      <div class="del-icon">🗑️</div>
+      <h2>Remove this room?</h2>
+      <p id="delMsg">This will remove <strong></strong> from your listings permanently.</p>
+      <div class="del-actions">
+        <button class="del-cancel" onclick="closeDelete()">Keep It</button>
+        <button class="del-confirm" onclick="confirmDelete()">Yes, Remove</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"><span id="toastMsg"></span></div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand"><div class="footer-brand-dot"></div><span class="footer-copy">© 2026 RentLink Portal · Block A</span></div>
+      <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Support</a></div>
+    </div>
+  </footer>
+
+  <script>
+    /* ═══════════════════════════════════════
+       DATA & STATE
+    ═══════════════════════════════════════ */
+    const AMENITY_LIST = ['Wi-Fi','AC','Parking','Cable TV','Water incl.','Storage','Balcony','CCTV'];
+    const EMOJIS = ['🏠','🏢','🛋️','🌿','🌟','🏙️','🪴','🌙','🌅','🔑','🏡','💎'];
+    const AMENITY_ICONS = {'Wi-Fi':'📶','AC':'❄️','Parking':'🅿️','Cable TV':'📺','Water incl.':'💧','Storage':'📦','Balcony':'🌇','CCTV':'📹'};
+
+    /* Default rooms (landlord's existing portfolio) */
+    let ROOMS = [
+      { id: genId(), unit:'Unit 1-A', floor:1, type:'Studio', price:12500, sqm:24, bath:1, status:'occupied', tenant:'Ramon Cruz', since:'Jan 2025', emoji:'🏠', amenities:['Wi-Fi','AC','Parking','Water incl.'], desc:'Cozy studio on Floor 1. Newly repainted.', rating:4.8, reviews:12 },
+      { id: genId(), unit:'Unit 1-B', floor:1, type:'Studio', price:11000, sqm:22, bath:1, status:'occupied', tenant:'Luz Villanueva', since:'Mar 2025', emoji:'🪴', amenities:['Wi-Fi','AC','Water incl.'], desc:'Affordable studio with good natural light.', rating:4.5, reviews:8 },
+      { id: genId(), unit:'Unit 1-C', floor:1, type:'1BR',    price:10500, sqm:28, bath:1, status:'occupied', tenant:'Joel Reyes', since:'Sep 2024', emoji:'🛋️', amenities:['AC','Water incl.','Storage'], desc:'Spacious 1-bedroom, great value.', rating:4.3, reviews:5 },
+      { id: genId(), unit:'Unit 2-A', floor:2, type:'1BR',    price:13000, sqm:32, bath:1, status:'occupied', tenant:'Maria Santos', since:'Jan 2025', emoji:'🌟', amenities:['Wi-Fi','AC','Parking','Cable TV','Water incl.'], desc:'Top-rated corner unit, full amenities.', rating:4.9, reviews:20 },
+      { id: genId(), unit:'Unit 2-B', floor:2, type:'1BR',    price:13000, sqm:30, bath:1, status:'occupied', tenant:'Danilo Abante', since:'Apr 2025', emoji:'🌿', amenities:['Wi-Fi','AC','Water incl.','Parking'], desc:'Well-kept 2nd floor unit.', rating:4.6, reviews:11 },
+      { id: genId(), unit:'Unit 3-A', floor:3, type:'2BR',    price:14000, sqm:40, bath:2, status:'occupied', tenant:'Carla Mendoza', since:'Jan 2025', emoji:'🏙️', amenities:['Wi-Fi','AC','Parking','Cable TV','Storage','Water incl.'], desc:'Premium top-floor 2-bedroom with views.', rating:5.0, reviews:7 },
+      { id: genId(), unit:'Unit 3-B', floor:3, type:'2BR',    price:12500, sqm:36, bath:1, status:'available', tenant:'', since:'', emoji:'🌙', amenities:['AC','Water incl.','Storage'], desc:'2-bedroom recently renovated. Ready for occupancy.', rating:4.2, reviews:4 },
+      { id: genId(), unit:'Unit 3-D', floor:3, type:'2BR',    price:13500, sqm:38, bath:2, status:'occupied', tenant:'Ana Delos Reyes', since:'Feb 2025', emoji:'🌅', amenities:['Wi-Fi','AC','Parking','Cable TV','Water incl.'], desc:'Bright corner unit, 2 bathrooms.', rating:4.7, reviews:9 },
+    ];
+
+    /* Persist rooms in localStorage */
+    function saveToStorage() { try { localStorage.setItem('rl_ll_rooms', JSON.stringify(ROOMS)); } catch(e){} }
+    function loadFromStorage() {
+      try {
+        const d = localStorage.getItem('rl_ll_rooms');
+        if (d) ROOMS = JSON.parse(d);
+      } catch(e){}
+    }
+
+    function genId() { return 'r_' + Math.random().toString(36).slice(2,9); }
+
+    let editingId   = null;
+    let deleteId    = null;
+    let currentView = 'grid';
+
+    /* ═══════════════════════════════════════
+       INIT
+    ═══════════════════════════════════════ */
+    (function init() {
+      loadFromStorage();
+      loadLandlordName();
+      buildEmojiRow();
+      buildAmenityChecks();
+      renderStats();
+      renderRooms();
+    })();
+
+    function loadLandlordName() {
+      try {
+        const s = JSON.parse(sessionStorage.getItem('rl_landlord_session') || localStorage.getItem('rl_landlord_session') || '{}');
+        if (s.name) {
+          document.getElementById('llName').textContent = s.name.split(' ')[0] + "'s Block";
+          document.getElementById('llAvatar').textContent = s.name.split(' ').map(n=>n[0]).join('').slice(0,2);
+        }
+      } catch(e){}
+    }
+
+    /* ═══════════════════════════════════════
+       STATS
+    ═══════════════════════════════════════ */
+    function renderStats() {
+      const occupied   = ROOMS.filter(r=>r.status==='occupied').length;
+      const available  = ROOMS.filter(r=>r.status==='available').length;
+      const maint      = ROOMS.filter(r=>r.status==='maintenance').length;
+      const totalRent  = ROOMS.filter(r=>r.status==='occupied').reduce((s,r)=>s+r.price,0);
+      const avgRating  = ROOMS.length ? (ROOMS.reduce((s,r)=>s+(r.rating||0),0)/ROOMS.length).toFixed(1) : '—';
+
+      document.getElementById('heroStats').innerHTML = `
+        <div class="ll-stat"><span class="ll-stat-val">${ROOMS.length}</span><span class="ll-stat-lbl">Total Rooms</span></div>
+        <div class="ll-divider-v"></div>
+        <div class="ll-stat"><span class="ll-stat-val green">${occupied}</span><span class="ll-stat-lbl">Occupied</span></div>
+        <div class="ll-divider-v"></div>
+        <div class="ll-stat"><span class="ll-stat-val blue">${available}</span><span class="ll-stat-lbl">Available</span></div>
+        <div class="ll-divider-v"></div>
+        <div class="ll-stat"><span class="ll-stat-val orange">${maint}</span><span class="ll-stat-lbl">Maintenance</span></div>
+        <div class="ll-divider-v"></div>
+        <div class="ll-stat"><span class="ll-stat-val green">₱${totalRent.toLocaleString()}</span><span class="ll-stat-lbl">Monthly Income</span></div>
+        <div class="ll-divider-v"></div>
+        <div class="ll-stat"><span class="ll-stat-val" style="color:#f1c40f">⭐ ${avgRating}</span><span class="ll-stat-lbl">Avg Rating</span></div>
+      `;
+    }
+
+    /* ═══════════════════════════════════════
+       RENDER ROOMS
+    ═══════════════════════════════════════ */
+    function stars(r) {
+      const f=Math.floor(r), h=r%1>=0.5, e=5-f-(h?1:0);
+      return '★'.repeat(f)+(h?'½':'')+'☆'.repeat(e);
+    }
+
+    function statusLabel(s) {
+      return { occupied:'Occupied', available:'Available', maintenance:'Maintenance' }[s] || s;
+    }
+
+    function renderRooms() {
+      const search = document.getElementById('searchInput').value.toLowerCase();
+      const sf     = document.getElementById('statusFilter').value;
+      const ff     = document.getElementById('floorFilter').value;
+
+      const filtered = ROOMS.filter(r => {
+        const ms = r.unit.toLowerCase().includes(search) || r.type.toLowerCase().includes(search);
+        const mst = !sf || r.status === sf;
+        const mf  = !ff || r.floor.toString() === ff;
+        return ms && mst && mf;
+      });
+
+      const grid  = document.getElementById('roomsGrid');
+      const empty = document.getElementById('emptyState');
+
+      if (ROOMS.length === 0) {
+        grid.innerHTML = ''; empty.style.display = 'block'; return;
+      }
+      empty.style.display = 'none';
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:3rem 1rem;color:var(--text-muted);font-size:0.9rem;">No rooms match your filters.</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map((r, i) => `
+        <div class="room-card" style="animation-delay:${i*0.05}s">
+          <div class="room-photo-wrapper">
+            <div class="room-photo">
+              <span style="position:relative;z-index:1">${r.emoji}</span>
+              <div class="room-photo-overlay"></div>
+              <div class="photo-badges">
+                <span class="status-badge ${r.status}">${statusLabel(r.status)}</span>
+                <span class="price-pill">₱${r.price.toLocaleString()}/mo</span>
+              </div>
+              <span class="floor-tag">Floor ${r.floor}</span>
+            </div>
+          </div>
+
+          <div class="room-body">
+            <div class="room-head">
+              <div>
+                <div class="room-unit">${r.unit}</div>
+                <div class="room-type">${r.type} · ${r.sqm||'—'} sqm · ${r.bath||1} bath</div>
+              </div>
+              <div class="room-rating">
+                <span class="stars">${stars(r.rating||0)}</span>
+                <span class="rating-num">${(r.rating||0).toFixed(1)}</span>
+                <span class="rating-ct">(${r.reviews||0})</span>
+              </div>
+            </div>
+
+            <div class="tenant-row">
+              ${r.status === 'occupied' && r.tenant ? `
+                <div class="tenant-avatar">${r.tenant.split(' ').map(n=>n[0]).join('').slice(0,2)}</div>
+                <div class="tenant-info">
+                  <div class="tenant-name">${r.tenant}</div>
+                  <div class="tenant-since">Tenant since ${r.since||'—'}</div>
+                </div>
+              ` : `
+                <div class="tenant-avatar" style="background:rgba(0,0,0,0.25);">—</div>
+                <div class="tenant-info"><div class="tenant-vacant">No current tenant</div></div>
+              `}
+            </div>
+
+            <div class="room-price">₱${r.price.toLocaleString()} <small>/ month</small></div>
+
+            <div class="amenities">
+              ${(r.amenities||[]).map(a=>`<span class="a-tag">${AMENITY_ICONS[a]||'•'} ${a}</span>`).join('')}
+            </div>
+
+            ${r.desc ? `<p style="font-size:0.77rem;color:var(--text-muted);line-height:1.55;margin-bottom:0.85rem;">${r.desc}</p>` : ''}
+
+            <hr class="room-divider" />
+
+            <div class="room-actions">
+              <button class="act-btn act-edit" onclick="openEditModal('${r.id}')">✏️ Edit</button>
+              <button class="act-btn act-toggle" onclick="toggleStatus('${r.id}')">
+                ${r.status==='available' ? '🔒 Mark Occupied' : r.status==='occupied' ? '🔓 Mark Available' : '🔧 Mark Available'}
+              </button>
+              <button class="act-btn act-delete" onclick="openDelete('${r.id}','${r.unit}')" title="Remove room">🗑️</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    /* ═══════════════════════════════════════
+       VIEW TOGGLE
+    ═══════════════════════════════════════ */
+    function setView(v) {
+      currentView = v;
+      const grid = document.getElementById('roomsGrid');
+      grid.classList.toggle('list-view', v === 'list');
+      document.getElementById('gridViewBtn').classList.toggle('active', v==='grid');
+      document.getElementById('listViewBtn').classList.toggle('active', v==='list');
+    }
+
+    /* ═══════════════════════════════════════
+       STATUS TOGGLE
+    ═══════════════════════════════════════ */
+    function toggleStatus(id) {
+      const r = ROOMS.find(x=>x.id===id); if (!r) return;
+      if (r.status==='occupied')     { r.status='available'; r.tenant=''; r.since=''; }
+      else if (r.status==='available') r.status='occupied';
+      else r.status='available';
+      saveToStorage(); renderStats(); renderRooms();
+      showToast(`${r.unit} marked as ${statusLabel(r.status)}.`);
+    }
+
+    /* ═══════════════════════════════════════
+       EMOJI ROW
+    ═══════════════════════════════════════ */
+    function buildEmojiRow() {
+      document.getElementById('emojiRow').innerHTML = EMOJIS.map(e =>
+        `<div class="emoji-opt ${e==='🏠'?'selected':''}" data-emoji="${e}" onclick="selectEmoji('${e}')">${e}</div>`
+      ).join('');
+    }
+
+    function selectEmoji(e) {
+      document.getElementById('fEmoji').value = e;
+      document.querySelectorAll('.emoji-opt').forEach(el => el.classList.toggle('selected', el.dataset.emoji===e));
+    }
+
+    /* ═══════════════════════════════════════
+       AMENITY CHECKBOXES
+    ═══════════════════════════════════════ */
+    function buildAmenityChecks(selected=[]) {
+      document.getElementById('amenityChecks').innerHTML = AMENITY_LIST.map(a => {
+        const on = selected.includes(a);
+        return `<label class="amenity-check ${on?'checked':''}" onclick="toggleAmenity(this,'${a}')">
+          <input type="checkbox" ${on?'checked':''} value="${a}" />
+          ${AMENITY_ICONS[a]||''} ${a}
+        </label>`;
+      }).join('');
+    }
+
+    function toggleAmenity(el, a) {
+      el.classList.toggle('checked');
+      el.querySelector('input').checked = el.classList.contains('checked');
+    }
+
+    function getSelectedAmenities() {
+      return [...document.querySelectorAll('#amenityChecks input:checked')].map(i=>i.value);
+    }
+
+    /* ═══════════════════════════════════════
+       ADD MODAL
+    ═══════════════════════════════════════ */
+    function openAddModal() {
+      editingId = null;
+      document.getElementById('modalTitle').textContent    = 'Add New Room';
+      document.getElementById('modalSubtitle').textContent = 'Fill in the details for your new listing.';
+      document.getElementById('saveBtnLabel').textContent  = 'Save Room →';
+      clearModalForm();
+      document.getElementById('modalBg').classList.add('open');
+    }
+
+    function openEditModal(id) {
+      const r = ROOMS.find(x=>x.id===id); if (!r) return;
+      editingId = id;
+      document.getElementById('modalTitle').textContent    = 'Edit Room';
+      document.getElementById('modalSubtitle').textContent = `Editing ${r.unit}`;
+      document.getElementById('saveBtnLabel').textContent  = 'Save Changes →';
+
+      document.getElementById('fEmoji').value  = r.emoji || '🏠';
+      document.getElementById('fUnit').value   = r.unit;
+      document.getElementById('fFloor').value  = r.floor;
+      document.getElementById('fType').value   = r.type;
+      document.getElementById('fPrice').value  = r.price;
+      document.getElementById('fSqm').value    = r.sqm || '';
+      document.getElementById('fBath').value   = r.bath || 1;
+      document.getElementById('fStatus').value = r.status;
+      document.getElementById('fTenant').value = r.tenant || '';
+      document.getElementById('fDesc').value   = r.desc || '';
+
+      // reset emoji row selection
+      document.querySelectorAll('.emoji-opt').forEach(el => el.classList.toggle('selected', el.dataset.emoji === (r.emoji||'🏠')));
+
+      buildAmenityChecks(r.amenities || []);
+      clearModalErrors();
+      document.getElementById('modalBg').classList.add('open');
+    }
+
+    function closeModal() {
+      document.getElementById('modalBg').classList.remove('open');
+      editingId = null;
+    }
+
+    function clearModalForm() {
+      ['fUnit','fPrice','fSqm','fTenant','fDesc'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('fFloor').value  = '';
+      document.getElementById('fType').value   = '';
+      document.getElementById('fBath').value   = '1';
+      document.getElementById('fStatus').value = 'available';
+      document.getElementById('fEmoji').value  = '🏠';
+      document.querySelectorAll('.emoji-opt').forEach(el => el.classList.toggle('selected', el.dataset.emoji==='🏠'));
+      buildAmenityChecks([]);
+      clearModalErrors();
+    }
+
+    function clearModalErrors() {
+      document.querySelectorAll('.mf-err').forEach(e=>e.classList.remove('show'));
+      document.querySelectorAll('.mi.err, .ms.err').forEach(e=>e.classList.remove('err'));
+    }
+
+    /* ═══════════════════════════════════════
+       SAVE ROOM
+    ═══════════════════════════════════════ */
+    function saveRoom() {
+      clearModalErrors();
+      let bad = false;
+
+      const unit   = document.getElementById('fUnit').value.trim();
+      const floor  = document.getElementById('fFloor').value;
+      const type   = document.getElementById('fType').value;
+      const price  = parseInt(document.getElementById('fPrice').value);
+
+      function showErr(fieldId, errId, msg) {
+        document.getElementById(fieldId).classList.add('err');
+        const e = document.getElementById(errId); e.textContent = msg; e.classList.add('show');
+        bad = true;
+      }
+
+      if (!unit)             showErr('fUnit',  'fUnitErr',  'Unit number is required.');
+      if (!floor)            showErr('fFloor', 'fFloorErr', 'Please select a floor.');
+      if (!type)             showErr('fType',  'fTypeErr',  'Please select a room type.');
+      if (!price || price<500) showErr('fPrice', 'fPriceErr', 'Enter a valid rent amount (min ₱500).');
+
+      if (bad) return;
+
+      const btn = document.getElementById('saveBtn');
+      btn.classList.add('loading');
+      document.getElementById('saveBtnLabel').textContent = 'Saving…';
+
+      setTimeout(() => {
+        btn.classList.remove('loading');
+
+        const roomData = {
+          id:        editingId || genId(),
+          unit, floor: parseInt(floor), type, price,
+          sqm:       parseInt(document.getElementById('fSqm').value) || 0,
+          bath:      parseInt(document.getElementById('fBath').value) || 1,
+          status:    document.getElementById('fStatus').value,
+          tenant:    document.getElementById('fTenant').value.trim(),
+          since:     editingId ? (ROOMS.find(r=>r.id===editingId)||{}).since || '' : '',
+          emoji:     document.getElementById('fEmoji').value || '🏠',
+          amenities: getSelectedAmenities(),
+          desc:      document.getElementById('fDesc').value.trim(),
+          rating:    editingId ? (ROOMS.find(r=>r.id===editingId)||{}).rating || 0 : 0,
+          reviews:   editingId ? (ROOMS.find(r=>r.id===editingId)||{}).reviews || 0 : 0,
+        };
+
+        if (editingId) {
+          const idx = ROOMS.findIndex(r=>r.id===editingId);
+          if (idx !== -1) ROOMS[idx] = roomData;
+        } else {
+          ROOMS.push(roomData);
+        }
+
+        saveToStorage();
+        closeModal();
+        renderStats();
+        renderRooms();
+        document.getElementById('saveBtnLabel').textContent = editingId ? 'Save Changes →' : 'Save Room →';
+        showToast(editingId ? `✅ ${unit} updated!` : `✅ ${unit} added to your listings!`);
+      }, 500);
+    }
+
+    /* ═══════════════════════════════════════
+       DELETE
+    ═══════════════════════════════════════ */
+    function openDelete(id, unit) {
+      deleteId = id;
+      document.querySelector('#delBg #delMsg').innerHTML = `This will permanently remove <strong>${unit}</strong> from your listings.`;
+      document.getElementById('delBg').classList.add('open');
+    }
+    function closeDelete() { document.getElementById('delBg').classList.remove('open'); deleteId = null; }
+    function confirmDelete() {
+      if (!deleteId) return;
+      const r = ROOMS.find(x=>x.id===deleteId);
+      ROOMS = ROOMS.filter(x=>x.id!==deleteId);
+      saveToStorage(); closeDelete(); renderStats(); renderRooms();
+      showToast(`🗑️ ${r ? r.unit : 'Room'} removed.`);
+    }
+
+    /* ═══════════════════════════════════════
+       TOAST
+    ═══════════════════════════════════════ */
+    let toastTimer;
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      document.getElementById('toastMsg').textContent = msg;
+      t.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => t.classList.remove('show'), 3200);
+    }
+
+    /* Close modal on overlay click */
+    document.getElementById('modalBg').addEventListener('click', function(e) { if (e.target===this) closeModal(); });
+    document.getElementById('delBg').addEventListener('click',   function(e) { if (e.target===this) closeDelete(); });
+  </script>
+
+</body>
+</html>
