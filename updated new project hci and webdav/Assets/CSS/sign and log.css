@@ -88,3 +88,9 @@
   color: var(--accent-mint);
   font-weight: 500;
 }
+
+a {
+    text-decoration: none; /* Removes the underline */
+    color: inherit;        /* Makes the link the same color as the surrounding text */
+    cursor: pointer;       /* Keeps the "hand" icon when hovering */
+}

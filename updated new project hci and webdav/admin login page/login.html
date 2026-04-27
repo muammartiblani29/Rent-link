@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Access - RentLink</title>
+  <link rel="stylesheet" href="../Assets/CSS/main-style.css" />
+  <link rel="stylesheet" href="../Assets/CSS/navigation.css" />
+  <link rel="stylesheet" href="../Assets/CSS/sign and log.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">
+        <div class="logo-mark" >RL</div>
+        <span class="logo-name" >Rent<span>Link</span></span>
+      </a>
+        <nav class="main-nav">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../main/about us.html" class="nav-link">About us</a>
+        <a href="../main/contact us.html" class="nav-link">Contact us</a>
+      </nav>
+      <div class="nav-right">
+        <a href="signup.html" class="nav-link active">Login</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-wrapper">
+    <div class="auth-container fade-up">
+      <div class="auth-card" style="border-top: 4px solid var(--accent-blue);">
+        
+        <div id="adminStep1">
+          <div class="auth-header">
+            <span class="badge-blue" style="margin-bottom: 1rem; display: inline-block;">System Administrator</span>
+            <h2>Secure Gateway</h2>
+            <p>Enter your administrator email to receive an access code.</p>
+          </div>
+
+          <form id="adminFormEmail">
+            <div class="form-group">
+              <label>Administrator Email</label>
+              <input type="email" id="adminEmail" class="form-control" placeholder="admin@rentlink.com" required>
+            </div>
+            <button type="submit" class="btn-auth" style="background: var(--accent-blue);">Request Access Code</button>
+          </form>
+        </div>
+
+        <div id="adminStep2" style="display: none;">
+          <div class="auth-header">
+            <div class="badge-green" style="margin-bottom: 1rem; display: inline-block;">Code Sent</div>
+            <h2>Verify Identity</h2>
+            <p>A high-security code was sent to <br><strong id="targetEmail" style="color: var(--text-white);"></strong></p>
+          </div>
+
+          <form id="adminFormCode">
+            <div class="form-group">
+              <label>6-Digit Admin Code</label>
+              <input type="text" id="adminCode" maxlength="6" class="form-control" 
+                     style="text-align: center; letter-spacing: 10px; font-size: 1.5rem; font-weight: 700; border-color: var(--accent-blue);" 
+                     placeholder="000000" required>
+            </div>
+            <button type="submit" class="btn-auth" style="background: var(--accent-blue);">Enter Admin Panel</button>
+          </form>
+          <div class="auth-footer">
+            <p><a href="#" class="auth-link" onclick="location.reload()" style="color: var(--accent-blue);">Back to Email Entry</a></p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-brand-dot"></div>
+        <span class="footer-copy">RentLink Portal v1.0 — Block A</span>
+      </div>
+      <div class="footer-links">
+        <a href="../main/privacy.html">Privacy</a>
+        <a href="../main/terms.html">Terms</a>
+        <a href="../main/help.html">Help</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const s1 = document.getElementById('adminStep1');
+    const s2 = document.getElementById('adminStep2');
+
+    document.getElementById('adminFormEmail').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('targetEmail').textContent = document.getElementById('adminEmail').value;
+      s1.style.display = 'none';
+      s2.style.display = 'block';
+    });
+
+    document.getElementById('adminFormCode').addEventListener('submit', function(e) {
+      e.preventDefault();
+      if(document.getElementById('adminCode').value.length === 6) {
+        alert("Admin Access Granted.");
+        window.location.href = "../Admin page/admin-dashboard.html"; 
+      } else {
+        alert("Invalid Code.");
+      }
+    });
+  </script>
+
+</body>
+</html>
